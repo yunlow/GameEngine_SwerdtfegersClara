@@ -6,9 +6,12 @@ namespace GameEngine_SwerdtfegersLucas
 {
     public class Player
     {
-        private Vector2 _position;
+        private Vector2 _position = new Vector2(5, 5);
+;
+        private Vector2 _direction = new Vector2(0, 0);
+;
         private string _renderGraphic = "@";
-        private float speed = 3f;
+        private float speed = 10f;
 
         public void Render()
         {
