@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
@@ -11,16 +12,23 @@ namespace GameEngine_SwerdtfegersLucas
         private readonly Stopwatch _stopwatch = new Stopwatch();
         public void Run()
         {
+            const float FIXED_FRAME_TIME = 20 / 1000.0f;
+            float lag = 0.0f;
             float last_time = GetCurrentTime();
             while (!_shouldQuit)
             {
                 float loop_start_time = GetCurrentTime();
                 float elapsed_time = loop_start_time - last_time;
+                lag += elapsed_time;
                 ProcessInput();
-                Update(elapsed_time); // ICI
+                while (lag >= FIXED_FRAME_TIME)
+                {
+                    FixedUpdate(FIXED_FRAME_TIME);
+                    lag -= FIXED_FRAME_TIME;
+                }
+                Update(elapsed_time);
                 Render();
                 last_time = loop_start_time;
-
             }
         }
 
@@ -28,7 +36,10 @@ namespace GameEngine_SwerdtfegersLucas
         {
            
         }
+        public void FixedUpdate(float fixed_elapsed_time)
+        {
 
+        }
         public void Update(float elapsed_time)
         {
 
