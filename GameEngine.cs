@@ -15,11 +15,8 @@ namespace GameEngine_SwerdtfegersLucas
         public GameEngine()
 
         {
-
             _player = new Player();
-
             _stopwatch.Start();
-
         }
         public void Run()
         {
@@ -45,7 +42,8 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void ProcessInput()
         {
-            Vector2 player_position = new Vector2(0, 0);
+            Vector2 player_position = _player.GetDirection();
+
             switch (Console.ReadKey(true).Key)
 
             {
@@ -98,7 +96,42 @@ namespace GameEngine_SwerdtfegersLucas
 
         }
         public void Update(float elapsed_time)
+
         {
+
+            Vector2 position = _player.GetPosition();
+            Vector2 direction = _player.GetDirection();
+            
+            float x = position.GetX();
+            float y = position.GetY();
+            
+            if (x < 0) 
+            {
+                x = 0;
+                direction.SetX(0);
+             }
+
+            else if (x > Console.WindowHeight - 1)
+            {
+                x = Console.WindowHeight - 1;
+                direction.SetX(0);
+            }
+            
+            if (y < 0)
+            {
+                y = 0;
+                direction.SetY(0);
+            }
+
+            else if (y > Console.WindowWidth - 1)
+            {
+                y = Console.WindowWidth - 1;
+                direction.SetY(0);
+            }
+            position.SetX(x);
+            position.SetY(y);
+            _player.SetPosition(position);
+            _player.SetDirection(direction);
 
         }
 
