@@ -10,6 +10,7 @@ namespace GameEngine_SwerdtfegersLucas
     {
         private bool _shouldQuit = false;
         private readonly Stopwatch _stopwatch = new Stopwatch();
+        private Player _player;
         public void Run()
         {
             const float FIXED_FRAME_TIME = 20 / 1000.0f;
@@ -34,10 +35,31 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void ProcessInput()
         {
-           
+            switch (Console.ReadKey(true).Key)
+            {
+                Vector2 player_position = _player.GetPosition();
+                case ConsoleKey.LeftArrow:
+                --player_position.GetX();
+                    break;
+                case ConsoleKey.RightArrow:
+                    ++_xPosition;
+                    break;
+                case ConsoleKey.UpArrow:
+                    --_yPosition;
+                    break;
+                case ConsoleKey.DownArrow:
+                    ++_yPosition;
+                    break;
+            }
+
         }
         public void FixedUpdate(float fixed_elapsed_time)
         {
+            Vector2 player_direction = _player.GetPosition();
+
+            Vector2 new_position = new Vector2();
+
+            new_position.SetX(player_position)
 
         }
         public void Update(float elapsed_time)

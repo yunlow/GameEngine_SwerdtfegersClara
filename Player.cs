@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
-    internal class Player
+    public class Player
     {
         private Vector2 _position;
         private string _renderGraphic = "@";
@@ -21,6 +21,8 @@ namespace GameEngine_SwerdtfegersLucas
         {
 
         }
+
+        
 
         public Vector2 GetPosition()
         {
