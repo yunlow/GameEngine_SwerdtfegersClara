@@ -48,30 +48,21 @@ namespace GameEngine_SwerdtfegersLucas
 
             {
                 case ConsoleKey.LeftArrow:
-                    player_position.SetX(-1);
+                    player_position.SetX(player_position.GetX() - 1);
 
                     break;
-
-
-
+                
                 case ConsoleKey.RightArrow:
-                    player_position.SetX(1);
+                    player_position.SetX(player_position.GetX() + 1);
 
                     break;
-
-
-
-
                 case ConsoleKey.UpArrow:
-                    player_position.SetY(-1);
+                    player_position.SetY(player_position.GetY() - 1);
+
 
                     break;
-
-
-
-
                 case ConsoleKey.DownArrow:
-                    player_position.SetY(1);
+                    player_position.SetY(player_position.GetY() + 1);
 
                     break;
             }
@@ -84,12 +75,12 @@ namespace GameEngine_SwerdtfegersLucas
             Vector2 player_position = _player.GetPosition();
             Vector2 player_direction = _player.GetDirection();
 
-            float speed = _player.GetSpeed();
+            float _playerSpeed = _player.GetSpeed();
 
-            Vector2 new_position = new Vector2(player_position.GetX() + player_direction.GetX() * speed * fixed_elapsed_time,
+            Vector2 new_position = new Vector2();
 
-                player_position.GetY() + player_direction.GetY() * speed * fixed_elapsed_time
-);
+            new_position.SetX(player_position.GetX() + player_direction.GetX() * fixed_elapsed_time * _playerSpeed);
+            new_position.SetY(player_position.GetY() + player_direction.GetY() * fixed_elapsed_time * _playerSpeed);
 
             _player.SetPosition(new_position);
 
@@ -98,40 +89,11 @@ namespace GameEngine_SwerdtfegersLucas
         public void Update(float elapsed_time)
 
         {
+            Vector2 pos = _player.GetPosition();
+            pos.SetX(Math.Clamp(pos.GetX(), 0, Console.WindowHeight - 1));
+            pos.SetY(Math.Clamp(pos.GetY(), 0, Console.WindowWidth - 1));
 
-            Vector2 position = _player.GetPosition();
-            Vector2 direction = _player.GetDirection();
-            
-            float x = position.GetX();
-            float y = position.GetY();
-            
-            if (x < 0) 
-            {
-                x = 0;
-                direction.SetX(0);
-             }
-
-            else if (x > Console.WindowHeight - 1)
-            {
-                x = Console.WindowHeight - 1;
-                direction.SetX(0);
-            }
-            
-            if (y < 0)
-            {
-                y = 0;
-                direction.SetY(0);
-            }
-
-            else if (y > Console.WindowWidth - 1)
-            {
-                y = Console.WindowWidth - 1;
-                direction.SetY(0);
-            }
-            position.SetX(x);
-            position.SetY(y);
-            _player.SetPosition(position);
-            _player.SetDirection(direction);
+            _player.SetPosition(pos);
 
         }
 

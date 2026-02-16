@@ -10,6 +10,11 @@ namespace GameEngine_SwerdtfegersLucas
         private float _x;
         private float _y;
 
+        public Vector2()
+        {
+            _x = 0;
+            _y = 0;
+        }
         public Vector2(float x, float y)
         {
             _x = x;
