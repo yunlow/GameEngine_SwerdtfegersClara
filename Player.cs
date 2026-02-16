@@ -16,5 +16,15 @@ namespace GameEngine_SwerdtfegersLucas
             Console.SetCursorPosition((int)_position.GetY(), (int)_position.GetX());
             Console.Write(_renderGraphic);
         }
+
+        public void SetDirection(Vector2 new_direction)
+        {
+
+        }
+
+        public Vector2 GetPosition()
+        {
+            return _position;
+        }
     }
 }
