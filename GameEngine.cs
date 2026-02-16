@@ -35,23 +35,41 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void ProcessInput()
         {
+            Vector2 player_position = new Vector2(0, 0);
             switch (Console.ReadKey(true).Key)
-            {
-                Vector2 player_position = _player.GetPosition();
-                case ConsoleKey.LeftArrow:
-                --player_position.GetX();
-                    break;
-                case ConsoleKey.RightArrow:
-                    ++_xPosition;
-                    break;
-                case ConsoleKey.UpArrow:
-                    --_yPosition;
-                    break;
-                case ConsoleKey.DownArrow:
-                    ++_yPosition;
-                    break;
-            }
 
+            { case ConsoleKey.LeftArrow:
+                    player_position.SetX(-1);
+
+                    break;
+
+
+
+                case ConsoleKey.RightArrow:
+                    player_position.SetX(1);
+
+                    break;
+
+
+
+
+                case ConsoleKey.UpArrow:
+                    player_position.SetY(-1);
+
+                    break;
+
+
+
+
+                case ConsoleKey.DownArrow:
+                    player_position.SetY(1);
+
+                    break;
+
+
+
+            }
+            _player.SetDirection(player_position);
         }
         public void FixedUpdate(float fixed_elapsed_time)
         {
