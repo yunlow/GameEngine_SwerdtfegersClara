@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
-    internal class Vector2
+    public class Vector2
     {
         private float _x;
         private float _y;
