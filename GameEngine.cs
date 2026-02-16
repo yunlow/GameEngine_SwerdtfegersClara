@@ -11,6 +11,16 @@ namespace GameEngine_SwerdtfegersLucas
         private bool _shouldQuit = false;
         private readonly Stopwatch _stopwatch = new Stopwatch();
         private Player _player;
+
+        public GameEngine()
+
+        {
+
+            _player = new Player();
+
+            _stopwatch.Start();
+
+        }
         public void Run()
         {
             const float FIXED_FRAME_TIME = 20 / 1000.0f;
@@ -38,7 +48,8 @@ namespace GameEngine_SwerdtfegersLucas
             Vector2 player_position = new Vector2(0, 0);
             switch (Console.ReadKey(true).Key)
 
-            { case ConsoleKey.LeftArrow:
+            {
+                case ConsoleKey.LeftArrow:
                     player_position.SetX(-1);
 
                     break;
@@ -65,19 +76,25 @@ namespace GameEngine_SwerdtfegersLucas
                     player_position.SetY(1);
 
                     break;
-
-
-
             }
-            _player.SetDirection(player_position);
+
+
+            
         }
         public void FixedUpdate(float fixed_elapsed_time)
         {
-            Vector2 player_direction = _player.GetPosition();
+            Vector2 player_position = _player.GetPosition();
+            Vector2 player_direction = _player.GetDirection();
 
-            Vector2 new_position = new Vector2();
+            float speed = _player.GetSpeed();
 
-            new_position.SetX(player_position)
+            Vector2 new_position = new Vector2(player_position.GetX() + player_direction.GetX() * speed * fixed_elapsed_time,
+
+                player_position.GetY() + player_direction.GetY() * speed * fixed_elapsed_time
+);
+
+            _player.SetPosition(new_position);
+
 
         }
         public void Update(float elapsed_time)
@@ -87,6 +104,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void Render()
         {
+            _player.Render();
 
         }
 
