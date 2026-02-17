@@ -50,16 +50,16 @@ namespace GameEngine_SwerdtfegersLucas
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        new_direction.SetY(-1); 
-                        break;
-                    case ConsoleKey.DownArrow:
-                        new_direction.SetY(1); 
-                        break;
-                    case ConsoleKey.LeftArrow:
                         new_direction.SetX(-1); 
                         break;
+                    case ConsoleKey.DownArrow:
+                        new_direction.SetX(1); 
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        new_direction.SetY(-1); 
+                        break;
                     case ConsoleKey.RightArrow:
-                        new_direction.SetX(1);  
+                        new_direction.SetY(1);  
                         break;
                     
                 }
@@ -87,32 +87,26 @@ namespace GameEngine_SwerdtfegersLucas
         
             public void Update(float elapsed_time)
         {
-            Vector2 pos = _player.GetPosition();
-            Vector2 dir = _player.GetDirection();
+            Vector2 position = _player.GetPosition();
+            Vector2 direction = _player.GetDirection();
 
-            float newX = pos.GetX();
-            float newY = pos.GetY();
-            float dirX = dir.GetX();
-            float dirY = dir.GetY();
+            float newX = position.GetX() + direction.GetX();
+            float newY = position.GetY() + direction.GetY();
 
             if (newX < 0 || newX >= Console.WindowHeight)
             {
-                dirX = -dirX;
                 newX = Math.Clamp(newX, 0, Console.WindowHeight - 1);
             }
             if (newY < 0 || newY >= Console.WindowWidth)
             {
-                dirY = -dirY; 
                 newY = Math.Clamp(newY, 0, Console.WindowWidth - 1);
             }
 
-            pos.SetX(newX);
-            pos.SetY(newY);
-            dir.SetX(dirX);
-            dir.SetY(dirY);
+            position.SetX(newX);
+            position.SetY(newY);
+            _player.SetPosition(position);
 
-            _player.SetPosition(pos);
-            _player.SetDirection(dir);
+            _player.SetDirection(new Vector2(0, 0));
         }
 
         
