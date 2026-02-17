@@ -15,6 +15,7 @@ namespace GameEngine_SwerdtfegersLucas
         public GameEngine()
 
         {
+            Console.CursorVisible = false;
             _player = new Player();
             _stopwatch.Start();
         }
