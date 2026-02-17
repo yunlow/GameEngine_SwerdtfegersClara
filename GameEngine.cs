@@ -84,16 +84,38 @@ namespace GameEngine_SwerdtfegersLucas
 
 
         }
-        public void Update(float elapsed_time)
-
+        
+            public void Update(float elapsed_time)
         {
             Vector2 pos = _player.GetPosition();
-            pos.SetX(Math.Clamp(pos.GetX(), 0, Console.WindowHeight - 1));
-            pos.SetY(Math.Clamp(pos.GetY(), 0, Console.WindowWidth - 1));
+            Vector2 dir = _player.GetDirection();
+
+            float newX = pos.GetX();
+            float newY = pos.GetY();
+            float dirX = dir.GetX();
+            float dirY = dir.GetY();
+
+            if (newX < 0 || newX >= Console.WindowHeight)
+            {
+                dirX = -dirX;
+                newX = Math.Clamp(newX, 0, Console.WindowHeight - 1);
+            }
+            if (newY < 0 || newY >= Console.WindowWidth)
+            {
+                dirY = -dirY; 
+                newY = Math.Clamp(newY, 0, Console.WindowWidth - 1);
+            }
+
+            pos.SetX(newX);
+            pos.SetY(newY);
+            dir.SetX(dirX);
+            dir.SetY(dirY);
 
             _player.SetPosition(pos);
-
+            _player.SetDirection(dir);
         }
+
+        
 
         public void Render()
         {
