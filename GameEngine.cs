@@ -42,38 +42,32 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void ProcessInput()
         {
-            
-
-            switch (Console.ReadKey(true).Key)
-
+            if (Console.KeyAvailable)
             {
-                case ConsoleKey.LeftArrow:
-                   float _left = player_position.GetX();
-                    --_left;
+                ConsoleKey key = Console.ReadKey(true).Key;
+                Vector2 new_direction = new Vector2(0, 0);
 
-                    break;
-                
-                case ConsoleKey.RightArrow:
-                   float _right = player_position.GetX();
-                    ++_right;
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        new_direction.SetY(-1); 
+                        break;
+                    case ConsoleKey.DownArrow:
+                        new_direction.SetY(1); 
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        new_direction.SetX(-1); 
+                        break;
+                    case ConsoleKey.RightArrow:
+                        new_direction.SetX(1);  
+                        break;
+                    
+                }
+                _player.SetDirection(new_direction);
 
-                    break;
-                case ConsoleKey.UpArrow:
-                   float _up =player_position.GetY();
-                    --_up;
 
-
-                    break;
-                case ConsoleKey.DownArrow:
-                    float _down = player_position.GetY();
-                    ++_down;
-
-                    break;
             }
-
-
-            
-        }
+            }
         public void FixedUpdate(float fixed_elapsed_time)
         {
             Vector2 player_position = _player.GetPosition();
