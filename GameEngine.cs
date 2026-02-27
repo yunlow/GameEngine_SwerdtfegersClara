@@ -10,13 +10,13 @@ namespace GameEngine_SwerdtfegersLucas
     {
         private bool _shouldQuit = false;
         private readonly Stopwatch _stopwatch = new Stopwatch();
-        private Player _player;
+        private Player player;
 
         public GameEngine()
 
         {
             Console.CursorVisible = false;
-            _player = new Player();
+            player = new Player();
             _stopwatch.Start();
         }
         public void Run()
@@ -64,57 +64,57 @@ namespace GameEngine_SwerdtfegersLucas
                         break;
                     
                 }
-                _player.SetDirection(new_direction);
+                player.SetDirection(new_direction);
 
 
             }
             }
         public void FixedUpdate(float fixed_elapsed_time)
         {
-            Vector2 player_position = _player.GetPosition();
-            Vector2 player_direction = _player.GetDirection();
+            Vector2 player_position = player.GetPosition();
+            Vector2 player_direction = player.GetDirection();
 
-            float _playerSpeed = _player.GetSpeed();
+            float player_speed = player.GetSpeed();
 
             Vector2 new_position = new Vector2();
 
-            new_position.SetX(player_position.GetX() + player_direction.GetX() * fixed_elapsed_time * _playerSpeed);
-            new_position.SetY(player_position.GetY() + player_direction.GetY() * fixed_elapsed_time * _playerSpeed);
+            new_position.SetX(player_position.GetX() + player_direction.GetX() * fixed_elapsed_time * player_speed);
+            new_position.SetY(player_position.GetY() + player_direction.GetY() * fixed_elapsed_time * player_speed);
 
-            _player.SetPosition(new_position);
+            player.SetPosition(new_position);
 
 
         }
         
             public void Update(float elapsed_time)
         {
-            Vector2 position = _player.GetPosition();
-            Vector2 direction = _player.GetDirection();
+            Vector2 position = player.GetPosition();
+            Vector2 direction = player.GetDirection();
 
-            float newX = position.GetX() + direction.GetX();
-            float newY = position.GetY() + direction.GetY();
+            float new_x = position.GetX() + direction.GetX();
+            float new_y = position.GetY() + direction.GetY();
 
-            if (newX < 0 || newX >= Console.WindowHeight)
+            if (new_x < 0 || new_x >= Console.WindowHeight)
             {
-                newX = Math.Clamp(newX, 0, Console.WindowHeight - 1);
+                new_x = Math.Clamp(new_x, 0, Console.WindowHeight - 1);
             }
-            if (newY < 0 || newY >= Console.WindowWidth)
+            if (new_y < 0 || new_y >= Console.WindowWidth)
             {
-                newY = Math.Clamp(newY, 0, Console.WindowWidth - 1);
+                new_y = Math.Clamp(new_y, 0, Console.WindowWidth - 1);
             }
 
-            position.SetX(newX);
-            position.SetY(newY);
-            _player.SetPosition(position);
+            position.SetX(new_x);
+            position.SetY(new_y);
+            player.SetPosition(position);
 
-            _player.SetDirection(new Vector2(0, 0));
+            player.SetDirection(new Vector2(0, 0));
         }
 
         
 
         public void Render()
         {
-            _player.Render();
+            player.Render();
 
         }
 
