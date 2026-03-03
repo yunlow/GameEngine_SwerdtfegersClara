@@ -13,7 +13,10 @@ namespace GameEngine_SwerdtfegersLucas
         private Player player;
 
         private List<GameObject> _gameObjectTable = new List<GameObject>();
-       
+
+        private List<GameObject> _gameObjectToAddTable = new List<GameObject>();
+        private List<GameObject> _gameObjectToRemoveTable = new List<GameObject>();
+
         public GameEngine()
 
         {
@@ -42,6 +45,7 @@ namespace GameEngine_SwerdtfegersLucas
                 }
                 Update(elapsed_time);
                 Render();
+                UpdateGameObjectTable();
                 last_time = loop_start_time;
             }
         }
@@ -109,6 +113,33 @@ namespace GameEngine_SwerdtfegersLucas
         public float GetCurrentTime()
         {
             return _stopwatch.ElapsedMilliseconds / 1000.0f;
+        }
+
+        public void AddGameObject(GameObject game_object)
+        {
+            _gameObjectToAddTable.Add(game_object);
+        }
+
+        public void RemoveGameObject(GameObject game_object)
+        {
+            _gameObjectToRemoveTable.Add(game_object);
+        }
+
+        private void UpdateGameObjectTable()
+        {
+            
+            foreach (GameObject obj in _gameObjectToAddTable)
+            {
+                _gameObjectTable.Add(obj);
+            }
+            _gameObjectToAddTable.Clear();
+
+           
+            foreach (GameObject obj in _gameObjectToRemoveTable)
+            {
+                _gameObjectTable.Remove(obj);
+            }
+            _gameObjectToRemoveTable.Clear();
         }
     }
 }

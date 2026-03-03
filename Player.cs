@@ -12,7 +12,7 @@ namespace GameEngine_SwerdtfegersLucas
         private string _renderGraphic = "@";
         private float speed = 10f;
 
-        public void Render()
+        public override void Render()
         {
             Console.Clear();
             Console.SetCursorPosition((int)_position.GetY(), (int)_position.GetX());
