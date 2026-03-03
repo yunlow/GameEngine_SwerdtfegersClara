@@ -6,11 +6,11 @@ using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
-    internal class GameEngine
+    public class GameEngine
     {
         private bool _shouldQuit = false;
         private readonly Stopwatch _stopwatch = new Stopwatch();
-        private Player player;
+        
 
         private List<GameObject> _gameObjectTable = new List<GameObject>();
 
@@ -52,32 +52,16 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void ProcessInput()
         {
-            if (Console.KeyAvailable)
+            foreach (GameObject player in _gameObjectTable)
             {
-                ConsoleKey key = Console.ReadKey(true).Key;
-                Vector2 new_direction = new Vector2(0, 0);
-
-                switch (key)
+                if (Console.KeyAvailable)
                 {
-                    case ConsoleKey.UpArrow:
-                        new_direction.SetX(-1); 
-                        break;
-                    case ConsoleKey.DownArrow:
-                        new_direction.SetX(1); 
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        new_direction.SetY(-1); 
-                        break;
-                    case ConsoleKey.RightArrow:
-                        new_direction.SetY(1);  
-                        break;
-                    
+                    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                    player.HandleInput(keyInfo.Key);
                 }
-                player.SetDirection(new_direction);
-
-
             }
-            }
+        }
+
         public void FixedUpdate(float fixed_elapsed_time)
         {
             foreach(GameObject player in _gameObjectTable)
@@ -128,16 +112,16 @@ namespace GameEngine_SwerdtfegersLucas
         private void UpdateGameObjectTable()
         {
             
-            foreach (GameObject obj in _gameObjectToAddTable)
+            foreach (GameObject game_object in _gameObjectToAddTable)
             {
-                _gameObjectTable.Add(obj);
+                _gameObjectTable.Add(game_object);
             }
             _gameObjectToAddTable.Clear();
 
            
-            foreach (GameObject obj in _gameObjectToRemoveTable)
+            foreach (GameObject game_object in _gameObjectToRemoveTable)
             {
-                _gameObjectTable.Remove(obj);
+                _gameObjectTable.Remove(game_object);
             }
             _gameObjectToRemoveTable.Clear();
         }

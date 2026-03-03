@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
@@ -11,6 +12,11 @@ namespace GameEngine_SwerdtfegersLucas
 
         private string _renderGraphic = "@";
         private float speed = 10f;
+
+        public Player(GameEngine game_engine)
+        {
+            game_engine.AddGameObject(this);
+        }
 
         public override void Render()
         {
@@ -72,8 +78,35 @@ namespace GameEngine_SwerdtfegersLucas
             _direction = new Vector2(0, 0);
         }
 
-        
+        public override void HandleInput(ConsoleKey player_command)
+        {
+            if (Console.KeyAvailable)
+            {
+                ConsoleKey key = Console.ReadKey(true).Key;
+                Vector2 new_direction = new Vector2(0, 0);
+
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        new_direction.SetX(-1);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        new_direction.SetX(1);
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        new_direction.SetY(-1);
+                        break;
+                    case ConsoleKey.RightArrow:
+                        new_direction.SetY(1);
+                        break;
+
+                }
+
+                SetDirection(new_direction);
 
 
-    }
+            }
+
+
+        }
 }
