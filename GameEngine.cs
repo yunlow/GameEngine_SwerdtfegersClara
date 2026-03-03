@@ -12,12 +12,17 @@ namespace GameEngine_SwerdtfegersLucas
         private readonly Stopwatch _stopwatch = new Stopwatch();
         private Player player;
 
+        private List<GameObject> _gameObjectTable = new List<GameObject>();
+       
         public GameEngine()
 
         {
             Console.CursorVisible = false;
-            player = new Player();
             _stopwatch.Start();
+
+            Player player = new Player();
+            _gameObjectTable.Add(player);
+
         }
         public void Run()
         {
@@ -71,50 +76,33 @@ namespace GameEngine_SwerdtfegersLucas
             }
         public void FixedUpdate(float fixed_elapsed_time)
         {
-            Vector2 player_position = player.GetPosition();
-            Vector2 player_direction = player.GetDirection();
-
-            float player_speed = player.GetSpeed();
-
-            Vector2 new_position = new Vector2();
-
-            new_position.SetX(player_position.GetX() + player_direction.GetX() * fixed_elapsed_time * player_speed);
-            new_position.SetY(player_position.GetY() + player_direction.GetY() * fixed_elapsed_time * player_speed);
-
-            player.SetPosition(new_position);
+            foreach(GameObject player in _gameObjectTable)
+            {
+                player.FixedUpdate(fixed_elapsed_time);
+            }
 
 
         }
         
             public void Update(float elapsed_time)
         {
-            Vector2 position = player.GetPosition();
-            Vector2 direction = player.GetDirection();
-
-            float new_x = position.GetX() + direction.GetX();
-            float new_y = position.GetY() + direction.GetY();
-
-            if (new_x < 0 || new_x >= Console.WindowHeight)
+            for(int game_object_index = 0; game_object_index < _gameObjectTable.Count; game_object_index++)
             {
-                new_x = Math.Clamp(new_x, 0, Console.WindowHeight - 1);
-            }
-            if (new_y < 0 || new_y >= Console.WindowWidth)
-            {
-                new_y = Math.Clamp(new_y, 0, Console.WindowWidth - 1);
+                _gameObjectTable[game_object_index].Update(elapsed_time);
             }
 
-            position.SetX(new_x);
-            position.SetY(new_y);
-            player.SetPosition(position);
-
-            player.SetDirection(new Vector2(0, 0));
+           
         }
 
         
 
         public void Render()
         {
-            player.Render();
+            
+            foreach(GameObject player in _gameObjectTable)
+            {
+                player.Render();
+            }
 
         }
 

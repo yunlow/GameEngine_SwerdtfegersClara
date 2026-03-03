@@ -8,5 +8,7 @@ namespace GameEngine_SwerdtfegersLucas
     {
         public abstract void Update(float elapsed_time);
         public abstract void FixedUpdate(float fixed_elapsed_time);
+
+        public abstract void Render();
     }
 }
