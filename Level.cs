@@ -19,6 +19,12 @@ namespace GameEngine_SwerdtfegersLucas
             _gameEngine = game_engine;
            
  game_engine.AddGameObject(this);
+            Building building = new Building(_gameEngine);
+            building.SetPosition(new Vector2(10, 10));
+            Generator generator = new Generator(10, _gameEngine);
+            generator.SetPosition(new Vector2(15, 15));
+            Factory factory = new Factory(10, 2, 1, _gameEngine);
+            factory.SetPosition(new Vector2(50, 8));
 
             for (int i = 0; i < 4; i++)
             {

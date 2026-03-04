@@ -16,19 +16,19 @@ namespace GameEngine_SwerdtfegersLucas
         private float _directionTimer = 0f;
         private float _directionChangeInterval = 3f;
 
-        public Enemy(GameEngine gameEngine, Level level, Vector2 startPosition)
+        public Enemy(GameEngine game_engine, Level level, Vector2 start_position)
         {
             _level = level;
-            _position = startPosition;
+            _position = start_position;
 
             ChangeDirectionRandom();
 
-            gameEngine.AddGameObject(this);
+            game_engine.AddGameObject(this);
         }
 
-        public override void FixedUpdate(float fixedDeltaTime)
+        public override void FixedUpdate(float fixed_elapsed_time)
         {
-            _directionTimer += fixedDeltaTime;
+            _directionTimer += fixed_elapsed_time;
 
             if (_directionTimer >= _directionChangeInterval)
             {
@@ -36,8 +36,8 @@ namespace GameEngine_SwerdtfegersLucas
                 _directionTimer = 0f;
             }
 
-            float newX = _position.GetX() + _direction.GetX() * _speed * fixedDeltaTime;
-            float newY = _position.GetY() + _direction.GetY() * _speed * fixedDeltaTime;
+            float newX = _position.GetX() + _direction.GetX() * _speed * fixed_elapsed_time;
+            float newY = _position.GetY() + _direction.GetY() * _speed * fixed_elapsed_time;
 
 
             if (newX < 0 || newX >= _level.Width)
@@ -58,13 +58,13 @@ namespace GameEngine_SwerdtfegersLucas
             Console.Write("E");
         }
 
-        public override void HandleInput(ConsoleKey key) { }
+        public override void HandleInput(ConsoleKey handle_input) { }
 
         private void ChangeDirectionRandom()
         {
-            int dir = _random.Next(4);
+            int direction = _random.Next(4);
 
-            switch (dir)
+            switch (direction)
             {
                 case 0: _direction = new Vector2(-1, 0); break;
                 case 1: _direction = new Vector2(1, 0); break;
