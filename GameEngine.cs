@@ -27,7 +27,7 @@ namespace GameEngine_SwerdtfegersLucas
 
             Player player = new Player(this, level);
             _gameObjectTable.Add(player);
-            _gameObjectTable.Add(level);
+            
 
         }
         public void Run()

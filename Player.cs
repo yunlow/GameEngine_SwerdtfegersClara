@@ -85,12 +85,10 @@ namespace GameEngine_SwerdtfegersLucas
 
         public override void HandleInput(ConsoleKey player_command)
         {
-            if (Console.KeyAvailable)
-            {
-                ConsoleKey key = Console.ReadKey(true).Key;
+            
                 Vector2 new_direction = new Vector2(0, 0);
 
-                switch (key)
+                switch (player_command)
                 {
                     case ConsoleKey.UpArrow:
                         new_direction.SetX(-1);
@@ -115,4 +113,5 @@ namespace GameEngine_SwerdtfegersLucas
 
         }
     }
-}
+
+
