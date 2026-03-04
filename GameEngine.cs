@@ -23,8 +23,11 @@ namespace GameEngine_SwerdtfegersLucas
             Console.CursorVisible = false;
             _stopwatch.Start();
 
-            Player player = new Player();
+            Level level = new Level(this, Console.WindowHeight, Console.WindowWidth);
+
+            Player player = new Player(this, level);
             _gameObjectTable.Add(player);
+            _gameObjectTable.Add(level);
 
         }
         public void Run()
