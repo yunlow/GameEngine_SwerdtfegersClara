@@ -6,7 +6,7 @@ namespace GameEngine_SwerdtfegersLucas
 {
     internal class Factory : Building
     {
-        private Vector2 _position = new Vector2(0, 0);
+        private Vector2 _position = new Vector2(0,0);
 
         private int _inputRequired;
         private int _outputProduced;
@@ -57,7 +57,7 @@ namespace GameEngine_SwerdtfegersLucas
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition((int)_position.GetY(), (int)_position.GetX());
-            Console.Write($"F[{_inputCount}->{_outputCount}]");
+            Console.Write($"F[{_inputCount} + {_outputCount}]");
             
         }
     }

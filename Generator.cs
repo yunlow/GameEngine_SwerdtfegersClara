@@ -7,7 +7,7 @@ namespace GameEngine_SwerdtfegersLucas
     internal class Generator : Building
     {
 
-        private Vector2 _position = new Vector2(0, 0);
+        private Vector2 _position = new Vector2(0,0);
 
         private float _productionInterval;
         private float _productionTimer = 0f;
