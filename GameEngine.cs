@@ -26,7 +26,7 @@ namespace GameEngine_SwerdtfegersLucas
             Level level = new Level(this, Console.WindowHeight, Console.WindowWidth);
 
             Player player = new Player(this, level);
-            _gameObjectTable.Add(player);
+           
             
 
         }
@@ -55,21 +55,21 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void ProcessInput()
         {
-            foreach (GameObject player in _gameObjectTable)
+            foreach (GameObject game_object in _gameObjectTable)
             {
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                    player.HandleInput(keyInfo.Key);
+                    game_object.HandleInput(keyInfo.Key);
                 }
             }
         }
 
         public void FixedUpdate(float fixed_elapsed_time)
         {
-            foreach(GameObject player in _gameObjectTable)
+            foreach(GameObject game_object in _gameObjectTable)
             {
-                player.FixedUpdate(fixed_elapsed_time);
+                game_object.FixedUpdate(fixed_elapsed_time);
             }
 
 
@@ -90,9 +90,9 @@ namespace GameEngine_SwerdtfegersLucas
         public void Render()
         {
             
-            foreach(GameObject player in _gameObjectTable)
+            foreach(GameObject game_object in _gameObjectTable)
             {
-                player.Render();
+                game_object.Render();
             }
 
         }

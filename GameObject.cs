@@ -6,6 +6,7 @@ namespace GameEngine_SwerdtfegersLucas
 {
     public abstract class GameObject
     {
+        public GameObject(GameObject game_object) { }
         public abstract void Update(float elapsed_time);
         public abstract void FixedUpdate(float fixed_elapsed_time);
 
