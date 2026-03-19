@@ -11,12 +11,15 @@ namespace GameEngine_SwerdtfegersLucas
 
         private GameEngine _gameEngine;
         private string _renderGraphic = "B";
+        private Building _building;
 
         public Building(GameEngine game_engine)
         {
             _gameEngine = game_engine;
             game_engine.AddGameObject(this);
         }
+        public override void SetActive(bool is_active)
+        { _building.SetActive(is_active); }
 
         public void SetPosition(Vector2 position)
         {

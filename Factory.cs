@@ -19,6 +19,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public int _inputCount;
         public int _outputCount;
+        public Factory _factory;
 
         public Factory(int input_required, int output_produced, float conversion_rate, GameEngine game_engine) : base(game_engine)
             
@@ -29,6 +30,8 @@ namespace GameEngine_SwerdtfegersLucas
 
             _renderGraphic = "F";
         }
+        public override void SetActive(bool is_active)
+        { _factory.SetActive(is_active); }
 
         public void AddInput(int amount)
         {

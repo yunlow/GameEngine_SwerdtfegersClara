@@ -6,6 +6,8 @@ namespace GameEngine_SwerdtfegersLucas
 {
     public class PauseState : IState
     {
+        private StateMachine _stateMachine;
+        private GameEngine _gameEngine;
         public void Enter()
         {
             Console.WriteLine("Entering Pause Mode!");
@@ -28,7 +30,7 @@ namespace GameEngine_SwerdtfegersLucas
             }
             else if (input.Key == ConsoleKey.Q)
             {
-                Console.WriteLine("Accessing Main Menu!");
+                _stateMachine.ChangeState(new MainMenuState(_gameEngine));
             }
         }
     }

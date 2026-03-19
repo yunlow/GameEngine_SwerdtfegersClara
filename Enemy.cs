@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
@@ -15,6 +16,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         private float _directionTimer = 0f;
         private float _directionChangeInterval = 3f;
+        private static List<Enemy> _enemyTable = new List<Enemy>();
 
         public Enemy(GameEngine game_engine, Level level, Vector2 start_position)
         {
@@ -24,6 +26,14 @@ namespace GameEngine_SwerdtfegersLucas
             ChangeDirectionRandom();
 
             game_engine.AddGameObject(this);
+        }
+        public override void SetActive(bool is_active)
+        {
+            
+            foreach (Enemy enemy in _enemyTable)
+            {
+                enemy.SetActive(is_active);
+            }
         }
 
         public override void FixedUpdate(float fixed_elapsed_time)
@@ -40,15 +50,15 @@ namespace GameEngine_SwerdtfegersLucas
             float newY = _position.GetY() + _direction.GetY() * _speed * fixed_elapsed_time;
 
 
-            if (newX < 0 || newX >= _level.Width)
-                _direction.SetX(-_direction.GetX());
+            if (newX < 0 || newX >= _level.Width) {
+                _direction.SetX(-_direction.GetX()); }
             else
-                _position.SetX(newX);
+            { _position.SetX(newX); }
 
             if (newY < 0 || newY >= _level.Height)
-                _direction.SetY(-_direction.GetY());
+            { _direction.SetY(-_direction.GetY()); }
             else
-                _position.SetY(newY);
+            { _position.SetY(newY); }
         }
         public override void Update(float deltaTime) { }
 
@@ -72,6 +82,7 @@ namespace GameEngine_SwerdtfegersLucas
                 case 3: _direction = new Vector2(0, 1); break;
             }
         }
+        
     }
 }
         

@@ -12,6 +12,7 @@ namespace GameEngine_SwerdtfegersLucas
         private Random _random = new Random();
         private float enemy_spawn_timer = 0f;
         private float enemy_spawn_interval = 7f;
+        private Level _level;
         public Level(GameEngine game_engine, int width, int height)
         {
             _width = width;
@@ -32,6 +33,11 @@ namespace GameEngine_SwerdtfegersLucas
                 SpawnEnemy();
             }
 
+        }
+
+        public override void SetActive(bool is_active)
+        {
+            _level.SetActive(is_active);
         }
 
         public int Width
@@ -58,7 +64,7 @@ namespace GameEngine_SwerdtfegersLucas
         {
             Vector2 position = new Vector2(
                 _random.Next(0, _width),
-                _random.Next(0, _height)
+                _random.Next(2, _height)
             );
 
             new Enemy(_gameEngine, this, position);

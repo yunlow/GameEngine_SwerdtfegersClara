@@ -58,12 +58,13 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void ProcessInput()
         {
-            foreach (GameObject game_object in _gameObjectTable)
+            while (Console.KeyAvailable)
             {
-                if (Console.KeyAvailable)
+                ConsoleKeyInfo player_command = Console.ReadKey(true);
+                _gameFlowStateMachine.ProcessInput(player_command);
+                foreach (GameObject game_object in _gameObjectTable)
                 {
-                    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                    game_object.HandleInput(keyInfo.Key);
+                    game_object.HandleInput(player_command);
                 }
             }
         }

@@ -6,13 +6,13 @@ namespace GameEngine_SwerdtfegersLucas
 {
     public class MainMenuState : IState
     {
-       
 
+        private StateMachine _stateMachine;
         private GameEngine _engine;
 
-        public MainMenuState(GameEngine engine)
+        public MainMenuState(GameEngine _gameEngine)
         {
-            _engine = engine;
+            _engine = _gameEngine;
         }
         public void Enter()
         {
@@ -41,7 +41,7 @@ namespace GameEngine_SwerdtfegersLucas
 
             if (input.Key == ConsoleKey.Enter)
             {
-                Enter();
+                _stateMachine.ChangeState(new IngameState(_engine));
 
             }
         }

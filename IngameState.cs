@@ -4,11 +4,20 @@ using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
+    
     public class IngameState : IState
     {
+        
+        private StateMachine _stateMachine;
+        private GameEngine _engine;
+
+        public IngameState(GameEngine _gameEngine)
+        {
+            _engine = _gameEngine;
+        }
         public void Enter()
         {
-            Console.WriteLine("Entering Pause Mode!");
+            Console.WriteLine("Back to the game!");
         }
         public void Exit()
         {
@@ -23,12 +32,13 @@ namespace GameEngine_SwerdtfegersLucas
         {
             if (input.Key == ConsoleKey.Escape)
             {
-                Enter();
+                _stateMachine.ChangeState(new PauseState());
             }
         }
         public void Render()
         {
-            Console.WriteLine("Press Escape to pause the game.");
+            Console.WriteLine("Ingame State: Press Esc to pause");
+            Console.WriteLine("========================================================");
         }
     }
 }
