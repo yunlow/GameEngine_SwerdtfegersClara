@@ -18,6 +18,8 @@ namespace GameEngine_SwerdtfegersLucas
         private List<GameObject> _gameObjectToRemoveTable = new List<GameObject>();
 
         private StateMachine _gameFlowStateMachine = new StateMachine();
+
+        private IState _currentState;
         public GameEngine()
 
         {
@@ -27,9 +29,9 @@ namespace GameEngine_SwerdtfegersLucas
             Level level = new Level(this, Console.WindowHeight, Console.WindowWidth);
 
             Player player = new Player(this, level);
-           
-            
 
+
+            _currentState = new MainMenuState(this);
         }
         public void Run()
         {
