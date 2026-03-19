@@ -41,6 +41,7 @@ namespace GameEngine_SwerdtfegersLucas
             Console.SetCursorPosition((int)_position.GetY(), (int)_position.GetX());
             Console.Write($"G[{_productionCount}]");
           
+            Console.ResetColor();
         }
     }
 }
