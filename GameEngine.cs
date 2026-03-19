@@ -17,6 +17,7 @@ namespace GameEngine_SwerdtfegersLucas
         private List<GameObject> _gameObjectToAddTable = new List<GameObject>();
         private List<GameObject> _gameObjectToRemoveTable = new List<GameObject>();
 
+        private StateMachine _gameFlowStateMachine = new StateMachine();
         public GameEngine()
 
         {
@@ -85,7 +86,12 @@ namespace GameEngine_SwerdtfegersLucas
            
         }
 
+        public bool ShouldQuit()
+        { return _shouldQuit; }
+        public void Quit()
+        { _shouldQuit = true; }
         
+
 
         public void Render()
         {
@@ -99,7 +105,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public float GetCurrentTime()
         {
-            return _stopwatch.ElapsedMilliseconds / 1000.0f;
+            return  _stopwatch.ElapsedMilliseconds / 1000.0f; 
         }
 
         public void AddGameObject(GameObject game_object)
