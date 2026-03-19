@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection.Emit;
 using System.Reflection.PortableExecutable;
 using System.Text;
 
@@ -20,6 +21,7 @@ namespace GameEngine_SwerdtfegersLucas
         private StateMachine _gameFlowStateMachine = new StateMachine();
 
         private IState _currentState;
+        private GameEngine _gameEngine;
         public GameEngine()
 
         {
@@ -30,8 +32,8 @@ namespace GameEngine_SwerdtfegersLucas
 
             Player player = new Player(this, level);
 
-
-            _currentState = new MainMenuState(this);
+            _gameFlowStateMachine.SetInitialState(new MainMenuState(this));
+            
         }
         public void Run()
         {
@@ -64,11 +66,11 @@ namespace GameEngine_SwerdtfegersLucas
                 _gameFlowStateMachine.ProcessInput(player_command);
                 foreach (GameObject game_object in _gameObjectTable)
                 {
-                    game_object.HandleInput(player_command);
+                    game_object.HandleInput(player_command.Key);
                 }
             }
         }
-
+        
         public void FixedUpdate(float fixed_elapsed_time)
         {
             foreach(GameObject game_object in _gameObjectTable)
@@ -78,8 +80,12 @@ namespace GameEngine_SwerdtfegersLucas
 
 
         }
-        
-            public void Update(float elapsed_time)
+
+        public virtual void SetActive(bool is_active)
+        {
+           
+        }
+        public void Update(float elapsed_time)
         {
             for(int game_object_index = 0; game_object_index < _gameObjectTable.Count; game_object_index++)
             {

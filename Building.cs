@@ -11,17 +11,18 @@ namespace GameEngine_SwerdtfegersLucas
 
         private GameEngine _gameEngine;
         private string _renderGraphic = "B";
-        private Building _building;
+        
         private StateMachine _stateMachine;
 
-        public Building(GameEngine game_engine)
+        public Building(GameEngine game_engine, int construction_time)
         {
-            
+            _stateMachine = new StateMachine();
             _gameEngine = game_engine;
             game_engine.AddGameObject(this);
+            _stateMachine.SetInitialState(new BuildingUnderConstructionState(this, construction_time));
         }
         public override void SetActive(bool is_active)
-        {  _building.SetActive(is_active); }
+        {  this.SetActive(is_active); }
 
         public void SetPosition(Vector2 position)
         {
@@ -33,7 +34,7 @@ namespace GameEngine_SwerdtfegersLucas
             _stateMachine.FixedUpdate(fixed_elapsed_time);
         }
 
-        public override void Update(float elapsed_time) { _stateMachine.Update(elapsed_time)}
+        public override void Update(float elapsed_time) { _stateMachine.Update(elapsed_time); }
 
         public override void HandleInput(ConsoleKey handle_input) { }
 

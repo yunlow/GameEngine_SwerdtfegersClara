@@ -7,8 +7,7 @@ namespace GameEngine_SwerdtfegersLucas
     public class StateMachine
     {
         private IState _currentState;
-    
-
+  
         public void Update(float elapsed_time)
         {
             if (_currentState != null)
@@ -48,5 +47,6 @@ namespace GameEngine_SwerdtfegersLucas
             _currentState = new_state;
             _currentState.Enter();
         }
+
     }
 }

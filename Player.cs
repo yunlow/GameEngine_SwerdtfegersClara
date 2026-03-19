@@ -22,6 +22,10 @@ namespace GameEngine_SwerdtfegersLucas
 
             _level = level;
         }
+        public override void SetActive(bool is_active)
+        {
+            _level.SetActive(is_active);
+        }
 
         public override void Render()
         {

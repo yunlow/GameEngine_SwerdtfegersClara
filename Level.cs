@@ -13,6 +13,7 @@ namespace GameEngine_SwerdtfegersLucas
         private float enemy_spawn_timer = 0f;
         private float enemy_spawn_interval = 7f;
         private Level _level;
+        private int _randomNumber;
         public Level(GameEngine game_engine, int width, int height)
         {
             _width = width;
@@ -21,7 +22,7 @@ namespace GameEngine_SwerdtfegersLucas
            
  game_engine.AddGameObject(this);
 
-            Building building = new Building(_gameEngine);
+            Building building = new Building(_gameEngine, _randomNumber);
             building.SetPosition(new Vector2(10, 10));
             Generator generator = new Generator(10, _gameEngine);
             generator.SetPosition(new Vector2(15, 15));

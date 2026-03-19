@@ -14,9 +14,11 @@ namespace GameEngine_SwerdtfegersLucas
 
         private string _renderGraphic = "G";
         private int _productionCount = 0;
+        private int _productionTime;
+       
 
         public Generator(float productionInterval, GameEngine gameEngine)
-            : base(gameEngine)
+            : base(gameEngine, 5)
         {
             _productionInterval = productionInterval;
             
