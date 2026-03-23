@@ -15,5 +15,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public abstract void Render();
         public abstract void HandleInput(ConsoleKey player_command);
+
+        public abstract void SetActive(bool is_active);
     }
 }

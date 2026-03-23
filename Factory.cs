@@ -21,7 +21,7 @@ namespace GameEngine_SwerdtfegersLucas
         public int _outputCount;
         public Factory _factory;
 
-        public Factory(int input_required, int output_produced, float conversion_rate, GameEngine game_engine) : base(game_engine)
+        public Factory(int input_required, int output_produced, float conversion_rate, GameEngine game_engine) : base(game_engine, 5)
             
         {
             _inputRequired = input_required;
