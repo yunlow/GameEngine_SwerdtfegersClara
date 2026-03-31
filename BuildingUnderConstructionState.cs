@@ -6,13 +6,14 @@ namespace GameEngine_SwerdtfegersLucas
 {
     internal class BuildingUnderConstructionState : IState
     {
-        private float ConstructionTimeLeft;
+        private float _constructionTimeLeft;
         private Building _building;
         private StateMachine _stateMachine;
-        public BuildingUnderConstructionState(Building building, int construction_time)
+        public BuildingUnderConstructionState(StateMachine state_machine, Building building, int construction_time)
             {
-            ConstructionTimeLeft = construction_time;
+            _constructionTimeLeft = construction_time;
             _building = building;
+            _stateMachine = state_machine;
         }
         public void Enter()
         {
@@ -22,14 +23,14 @@ namespace GameEngine_SwerdtfegersLucas
         {
             
 
-            if (ConstructionTimeLeft <= 0)
+            if (_constructionTimeLeft <= 0)
             {
-                _stateMachine.ChangeState(new BuildingOperationalState(_stateMachine));
+                _stateMachine.ChangeState(new BuildingOperationalState(_stateMachine, _building));
             }
         }
         public void FixedUpdate(float fixed_elapsed_time)
         {
-            ConstructionTimeLeft -= fixed_elapsed_time;
+            _constructionTimeLeft -= fixed_elapsed_time;
         }
         public void ProcessInput(ConsoleKeyInfo input)
         {
@@ -37,7 +38,11 @@ namespace GameEngine_SwerdtfegersLucas
         }
         public void Render()
         {
-            Console.WriteLine("B" + ConstructionTimeLeft);
+            Console.SetCursorPosition((int)_building.GetPosition().GetX(), (int)_building.GetPosition().GetY());
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"{_building.GetRenderGraphic()}[%{_constructionTimeLeft}%]");
+            Console.ResetColor();
+
         }
         public void Exit()
         {

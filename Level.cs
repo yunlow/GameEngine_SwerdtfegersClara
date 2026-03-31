@@ -14,13 +14,13 @@ namespace GameEngine_SwerdtfegersLucas
         private float enemy_spawn_interval = 7f;
         private Level _level;
         private int _randomNumber;
-        public Level(GameEngine game_engine, int width, int height)
+        public Level(GameEngine game_engine, int width, int height) : base(game_engine)
         {
             _width = width;
             _height = height;
             _gameEngine = game_engine;
            
- game_engine.AddGameObject(this);
+
 
             Building building = new Building(_gameEngine, _randomNumber);
             building.SetPosition(new Vector2(10, 10));
@@ -29,10 +29,7 @@ namespace GameEngine_SwerdtfegersLucas
             Factory factory = new Factory(10, 2, 1, _gameEngine);
             factory.SetPosition(new Vector2(50, 8));
 
-            for (int i = 0; i < 4; i++)
-            {
-                SpawnEnemy();
-            }
+           
 
         }
 

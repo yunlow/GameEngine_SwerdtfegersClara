@@ -6,11 +6,13 @@ namespace GameEngine_SwerdtfegersLucas
 {
     public class BuildingClosedState : IState
     {
-        private float TimeBeforeOpening = 20f;
+        private float _timeBeforeOpening = 20f;
         private StateMachine _stateMachine;
-        public BuildingClosedState(StateMachine stateMachine)
+        private Building _building;
+        public BuildingClosedState(StateMachine state_machine, Building building)
         {
-            _stateMachine = new StateMachine();
+            _stateMachine = state_machine;
+            _building = building;
         }
         public void Enter()
         {
@@ -19,18 +21,22 @@ namespace GameEngine_SwerdtfegersLucas
         public void Exit() { }
         public void Update(float elapsed_time)
         {
-           TimeBeforeOpening += elapsed_time;
-            if (TimeBeforeOpening <= 0)
+           _timeBeforeOpening += elapsed_time;
+            if (_timeBeforeOpening <= 0)
             {
-                _stateMachine.ChangeState(new BuildingOperationalState(_stateMachine));
+                _stateMachine.ChangeState(new BuildingOperationalState(_stateMachine, _building));
             }
-            TimeBeforeOpening = 20f;
+            _timeBeforeOpening = 20f;
         }
         public void FixedUpdate(float fixed_elapsed_time) { }
         public void ProcessInput(ConsoleKeyInfo input) { }
         public void Render()
         {
-            Console.WriteLine("B" + TimeBeforeOpening);
+            Console.SetCursorPosition((int)_building.GetPosition().GetX(), (int)_building.GetPosition().GetY());
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"{_building.GetRenderGraphic()}[X{_timeBeforeOpening:F1}X]");
+            Console.ResetColor();
+
         }
     }
 }

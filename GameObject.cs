@@ -7,8 +7,12 @@ namespace GameEngine_SwerdtfegersLucas
 {
     public abstract class GameObject
     {
-
-      
+        private GameEngine _gameEngine;
+      public GameObject(GameEngine game_engine)
+        { 
+            _gameEngine = game_engine;
+            game_engine.AddGameObject(this);
+        }
         
         public abstract void Update(float elapsed_time);
         public abstract void FixedUpdate(float fixed_elapsed_time);
