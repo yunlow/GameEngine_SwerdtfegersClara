@@ -5,21 +5,55 @@ using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
-    public abstract class GameObject
+    public class GameObject
     {
         private GameEngine _gameEngine;
-      public GameObject(GameEngine game_engine)
+        private List<Component> _componentTable = new List<Component>();
+        private string _name;
+        public GameObject(GameEngine game_engine, string name)
         { 
             _gameEngine = game_engine;
             game_engine.AddGameObject(this);
+            _name = name;
         }
-        
-        public abstract void Update(float elapsed_time);
-        public abstract void FixedUpdate(float fixed_elapsed_time);
 
-        public abstract void Render();
-        public abstract void HandleInput(ConsoleKey player_command);
+        public void AddComponent(Component component)
+        {
+            _componentTable.Add(component);
+        }
+        public void Update(float elapsed_time)
+        {
+            foreach (Component component in _componentTable)
+            {
+                if (component != null && component.GetIsActive())
+                {
+                    component.Update(elapsed_time);
+                }
+            }
+        }
+        public void FixedUpdate(float fixed_elapsed_time)
+        {
+            foreach (Component component in _componentTable)
+            {
+                if (component != null && component.GetIsActive())
+                {
+                    component.FixedUpdate(fixed_elapsed_time);
+                }
+            }
+        }
 
-        public abstract void SetActive(bool is_active);
+        public TYPE GetComponent<TYPE>() where TYPE : Component
+        {
+            for (int component_index = 0; component_index < _componentTable.Count; component_index++)
+            {
+                if (_componentTable[component_index] is TYPE selected_component)
+                {
+                    return selected_component;
+                }
+            }
+            return null;
+        }
+
+
     }
 }
