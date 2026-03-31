@@ -21,15 +21,22 @@ namespace GameEngine_SwerdtfegersLucas
         public void Exit() { }
         public void Update(float elapsed_time)
         {
-           _timeBeforeOpening += elapsed_time;
+           _timeBeforeOpening -= elapsed_time;
             if (_timeBeforeOpening <= 0)
             {
                 _stateMachine.ChangeState(new BuildingOperationalState(_stateMachine, _building));
             }
             _timeBeforeOpening = 20f;
         }
-        public void FixedUpdate(float fixed_elapsed_time) { }
-        public void ProcessInput(ConsoleKeyInfo input) { }
+        public void FixedUpdate(float fixed_elapsed_time) 
+        {
+        
+        }
+
+        public void ProcessInput(ConsoleKeyInfo input) 
+        { 
+        
+        }
         public void Render()
         {
             Console.SetCursorPosition((int)_building.GetPosition().GetX(), (int)_building.GetPosition().GetY());

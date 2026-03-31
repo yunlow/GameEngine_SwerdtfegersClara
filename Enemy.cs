@@ -18,7 +18,7 @@ namespace GameEngine_SwerdtfegersLucas
         private float _directionChangeInterval = 3f;
         private static List<Enemy> _enemyTable = new List<Enemy>();
 
-        public Enemy(GameEngine game_engine, Level level, Vector2 start_position)
+        public Enemy(GameEngine game_engine, Level level, Vector2 start_position) : base(game_engine)
         {
             _level = level;
             _position = start_position;
@@ -29,8 +29,7 @@ namespace GameEngine_SwerdtfegersLucas
         }
         public override void SetActive(bool is_active)
         {
-            
-            foreach (Enemy enemy in _enemyTable)
+          foreach (Enemy enemy in _enemyTable)
             {
                 enemy.SetActive(is_active);
             }
@@ -50,17 +49,28 @@ namespace GameEngine_SwerdtfegersLucas
             float newY = _position.GetY() + _direction.GetY() * _speed * fixed_elapsed_time;
 
 
-            if (newX < 0 || newX >= _level.Width) {
-                _direction.SetX(-_direction.GetX()); }
+            if (newX < 0 || newX >= _level.Width) 
+            {
+                _direction.SetX(-_direction.GetX());
+            }
             else
-            { _position.SetX(newX); }
+            { 
+                _position.SetX(newX); 
+            }
 
             if (newY < 0 || newY >= _level.Height)
-            { _direction.SetY(-_direction.GetY()); }
+            {
+                _direction.SetY(-_direction.GetY());
+            }
             else
-            { _position.SetY(newY); }
+            {
+                _position.SetY(newY);
+            }
         }
-        public override void Update(float deltaTime) { }
+        public override void Update(float deltaTime) 
+        {
+        
+        }
 
         public override void Render()
         {
@@ -68,7 +78,10 @@ namespace GameEngine_SwerdtfegersLucas
             Console.Write("E");
         }
 
-        public override void HandleInput(ConsoleKey handle_input) { }
+        public override void HandleInput(ConsoleKey handle_input)
+        {
+        
+        }
 
         private void ChangeDirectionRandom()
         {

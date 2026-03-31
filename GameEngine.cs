@@ -28,12 +28,19 @@ namespace GameEngine_SwerdtfegersLucas
             Console.CursorVisible = false;
             _stopwatch.Start();
 
-            Level level = new Level(this, Console.WindowHeight, Console.WindowWidth);
-
-            Player player = new Player(this, level);
+            
 
             _gameFlowStateMachine.SetInitialState(new MainMenuState(this));
             
+        }
+        public void StartGame()
+        {
+            
+            _gameObjectTable.Clear();
+            _gameObjectToAddTable.Clear();
+
+            Level level = new Level(this, Console.WindowHeight, Console.WindowWidth);
+            Player player = new Player(this, level);
         }
         public void Run()
         {
@@ -81,13 +88,14 @@ namespace GameEngine_SwerdtfegersLucas
 
         }
 
-        public virtual void SetActive(bool is_active)
+        public virtual void SetActive(bool is_active) 
         {
-           
+        
         }
         public void Update(float elapsed_time)
         {
-            for(int game_object_index = 0; game_object_index < _gameObjectTable.Count; game_object_index++)
+            _gameFlowStateMachine.Update(elapsed_time);
+            for (int game_object_index = 0; game_object_index < _gameObjectTable.Count; game_object_index++)
             {
                 _gameObjectTable[game_object_index].Update(elapsed_time);
             }
@@ -96,16 +104,21 @@ namespace GameEngine_SwerdtfegersLucas
         }
 
         public bool ShouldQuit()
-        { return _shouldQuit; }
+        { 
+            return _shouldQuit;
+        }
         public void Quit()
-        { _shouldQuit = true; }
+        { 
+            _shouldQuit = true;
+        }
         
 
 
         public void Render()
         {
-            
-            foreach(GameObject game_object in _gameObjectTable)
+            Console.Clear();
+            _gameFlowStateMachine.Render();
+            foreach (GameObject game_object in _gameObjectTable)
             {
                 game_object.Render();
             }
@@ -119,7 +132,10 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void AddGameObject(GameObject game_object)
         {
-            _gameObjectToAddTable.Add(game_object);
+            if (!_gameObjectToAddTable.Contains(game_object) && !_gameObjectTable.Contains(game_object))
+            {
+                _gameObjectToAddTable.Add(game_object);
+            }
         }
 
         public void RemoveGameObject(GameObject game_object)

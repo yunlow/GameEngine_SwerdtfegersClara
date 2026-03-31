@@ -31,7 +31,9 @@ namespace GameEngine_SwerdtfegersLucas
             _renderGraphic = "F";
         }
         public override void SetActive(bool is_active)
-        { _factory.SetActive(is_active); }
+        { 
+            _factory.SetActive(is_active); 
+        }
 
         public void AddInput(int amount)
         {

@@ -21,12 +21,16 @@ namespace GameEngine_SwerdtfegersLucas
         }
         public void Exit()
         {
+
         }
         public void Update(float elapsed_time)
         {
+
         }
+
         public void FixedUpdate(float fixed_elapsed_time)
         {
+
         }
         public void ProcessInput(ConsoleKeyInfo input)
         {

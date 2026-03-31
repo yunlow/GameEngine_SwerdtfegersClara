@@ -29,7 +29,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public override void Render()
         {
-            Console.Clear();
+            
             Console.SetCursorPosition((int)_position.GetY(), (int)_position.GetX());
             Console.Write(_renderGraphic);
         }

@@ -7,7 +7,7 @@ namespace GameEngine_SwerdtfegersLucas
     public class MainMenuState : IState
     {
 
-        private StateMachine _stateMachine;
+       
         private GameEngine _engine;
 
         public MainMenuState(GameEngine _gameEngine)
@@ -16,7 +16,7 @@ namespace GameEngine_SwerdtfegersLucas
         }
         public void Enter()
         {
-
+            Console.Clear();
             Console.WriteLine("Entering game!");
         }
         public void Exit()
@@ -41,7 +41,7 @@ namespace GameEngine_SwerdtfegersLucas
 
             if (input.Key == ConsoleKey.Enter)
             {
-                _stateMachine.ChangeState(new IngameState(_engine));
+                _engine.StartGame();
 
             }
         }

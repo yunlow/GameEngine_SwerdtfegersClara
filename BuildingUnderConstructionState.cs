@@ -10,7 +10,7 @@ namespace GameEngine_SwerdtfegersLucas
         private Building _building;
         private StateMachine _stateMachine;
         public BuildingUnderConstructionState(StateMachine state_machine, Building building, int construction_time)
-            {
+        {
             _constructionTimeLeft = construction_time;
             _building = building;
             _stateMachine = state_machine;
@@ -21,8 +21,6 @@ namespace GameEngine_SwerdtfegersLucas
         }
         public void Update(float elapsed_time)
         {
-            
-
             if (_constructionTimeLeft <= 0)
             {
                 _stateMachine.ChangeState(new BuildingOperationalState(_stateMachine, _building));

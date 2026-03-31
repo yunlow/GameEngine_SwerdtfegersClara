@@ -29,7 +29,10 @@ namespace GameEngine_SwerdtfegersLucas
             Factory factory = new Factory(10, 2, 1, _gameEngine);
             factory.SetPosition(new Vector2(50, 8));
 
-           
+            for (int i = 0; i < 4; i++)
+            {
+                SpawnEnemy();
+            }
 
         }
 
@@ -39,12 +42,26 @@ namespace GameEngine_SwerdtfegersLucas
         }
 
         public int Width
-        { get { return _width; } }
+        { 
+            get 
+            { 
+                return _width; 
+            }
+        }
         public int Height
-        { get { return _height; } }
-        public override void Update(float elapsed_time) { }
+        { 
+            get 
+            { 
+                return _height; 
+            }
+        }
+        public override void Update(float elapsed_time) 
+        { 
+        
+        }
 
-        public override void FixedUpdate(float fixed_elapsed_time) {
+        public override void FixedUpdate(float fixed_elapsed_time)
+        {
             enemy_spawn_timer += fixed_elapsed_time;
 
             if (enemy_spawn_timer >= enemy_spawn_interval)
@@ -54,9 +71,15 @@ namespace GameEngine_SwerdtfegersLucas
             }
         }
 
-        public override void Render() { }
+        public override void Render() 
+        { 
+        
+        }
 
-        public override void HandleInput(ConsoleKey player_command) { }
+        public override void HandleInput(ConsoleKey player_command)
+        { 
+        
+        }
 
         private void SpawnEnemy()
         {

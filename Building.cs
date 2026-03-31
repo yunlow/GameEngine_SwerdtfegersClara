@@ -22,7 +22,9 @@ namespace GameEngine_SwerdtfegersLucas
             _stateMachine.SetInitialState(new BuildingUnderConstructionState(_stateMachine, this, construction_time));
         }
         public override void SetActive(bool is_active)
-        {  this.SetActive(is_active); }
+        {  
+           this.SetActive(is_active);
+        }
 
         public void SetPosition(Vector2 position)
         {
@@ -44,9 +46,15 @@ namespace GameEngine_SwerdtfegersLucas
             _stateMachine.FixedUpdate(fixed_elapsed_time);
         }
 
-        public override void Update(float elapsed_time) { _stateMachine.Update(elapsed_time); }
+        public override void Update(float elapsed_time) 
+        { 
+            _stateMachine.Update(elapsed_time);
+        }
 
-        public override void HandleInput(ConsoleKey handle_input) { }
+        public override void HandleInput(ConsoleKey handle_input)
+        {
+        
+        }
 
         public override void Render()
         {

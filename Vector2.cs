@@ -21,10 +21,22 @@ namespace GameEngine_SwerdtfegersLucas
             _y = y;
         }
 
-        public float GetX() { return _x; } 
-        public void SetX(float x) { _x = x; }
-        public float GetY() { return _y; }
-        public void SetY(float y) { _y = y; }
+        public float GetX() 
+        { 
+            return _x;
+        } 
+        public void SetX(float x)
+        {
+            _x = x;
+        }
+        public float GetY()
+        {
+            return _y; 
+        }
+        public void SetY(float y)
+        {
+            _y = y; 
+        }
                         
         
     }

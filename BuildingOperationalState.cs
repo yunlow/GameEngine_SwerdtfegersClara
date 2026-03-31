@@ -18,7 +18,11 @@ namespace GameEngine_SwerdtfegersLucas
         {
             Console.WriteLine("Building is now operational!");
         }
-        public void Exit() { }
+        public void Exit() 
+        { 
+
+        }
+
         public void Update(float elapsed_time)
         {
             _totalTime += elapsed_time;
@@ -27,8 +31,13 @@ namespace GameEngine_SwerdtfegersLucas
                 _stateMachine.ChangeState(new BuildingOperationalState(_stateMachine, _building));
             }
         }
-        public void FixedUpdate(float fixed_elapsed_time) { }
-        public void ProcessInput(ConsoleKeyInfo input) { }
+        public void FixedUpdate(float fixed_elapsed_time)
+        {
+        }
+        public void ProcessInput(ConsoleKeyInfo input) 
+        {
+        
+        }
         public void Render()
         {
             Console.SetCursorPosition((int)_building.GetPosition().GetX(), (int)_building.GetPosition().GetY());
