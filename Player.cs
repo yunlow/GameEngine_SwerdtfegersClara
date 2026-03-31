@@ -11,12 +11,12 @@ namespace GameEngine_SwerdtfegersLucas
         private Vector2 _direction = new Vector2(0, 0);
 
         private string _renderGraphic = "@";
-        private float speed = 10f;
+        private float _speed = 10f;
 
         private Level _level;
 
-       
-        public Player(GameEngine game_engine, Level level)
+
+        public Player(GameEngine game_engine, Level level) : base(game_engine)
         {
             game_engine.AddGameObject(this);
 
@@ -61,14 +61,14 @@ namespace GameEngine_SwerdtfegersLucas
         public float GetSpeed()
 
         {
-            return speed;
+            return _speed;
         }
 
         public override void FixedUpdate(float fixedDeltaTime)
         {
 
-            float newX = _position.GetX() + _direction.GetX() * fixedDeltaTime * speed;
-            float newY = _position.GetY() + _direction.GetY() * fixedDeltaTime * speed;
+            float newX = _position.GetX() + _direction.GetX() * fixedDeltaTime * _speed;
+            float newY = _position.GetY() + _direction.GetY() * fixedDeltaTime * _speed;
 
             _position.SetX(newX);
             _position.SetY(newY);
