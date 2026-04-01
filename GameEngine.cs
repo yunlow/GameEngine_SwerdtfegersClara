@@ -22,6 +22,11 @@ namespace GameEngine_SwerdtfegersLucas
 
         private IState _currentState;
         private GameEngine _gameEngine;
+
+        private GameObject _playerGameObject;
+        private GameObject _levelGameObject;
+
+        private InputComponent _inputComponent;
         public GameEngine()
 
         {
@@ -39,8 +44,17 @@ namespace GameEngine_SwerdtfegersLucas
             _gameObjectTable.Clear();
             _gameObjectToAddTable.Clear();
 
-            Level level = new Level(this, Console.WindowHeight, Console.WindowWidth);
-            Player player = new Player(this, level);
+            _levelGameObject = new GameObject(_gameEngine, "name");
+            LevelComponent level_component = new LevelComponent(_levelGameObject, _gameEngine);
+            _levelGameObject.AddComponent(level_component);
+
+            _playerGameObject = new GameObject(_gameEngine, "Player");
+            PositionComponent position_component = new PositionComponent(new Vector2(5, 5), _playerGameObject);
+            _playerGameObject.AddComponent(position_component);
+
+            _playerGameObject.AddComponent(new RenderComponent(_playerGameObject, "@", position_component));
+            _playerGameObject.AddComponent(new MovementComponent(_playerGameObject, 50,
+position_component, level_component));
         }
         public void Run()
         {
@@ -65,17 +79,25 @@ namespace GameEngine_SwerdtfegersLucas
             }
         }
 
+        public void RegisterInputComponent(InputComponent input_component)
+        {
+            
+        }
+
         public void ProcessInput()
         {
             while (Console.KeyAvailable)
             {
                 ConsoleKeyInfo player_command = Console.ReadKey(true);
                 _gameFlowStateMachine.ProcessInput(player_command);
-                foreach (GameObject game_object in _gameObjectTable)
+               
+                if (_inputComponent != null)
                 {
-                    game_object.HandleInput(player_command.Key);
+                    _inputComponent.HandleInput(player_command);
                 }
             }
+
+          
         }
         
         public void FixedUpdate(float fixed_elapsed_time)

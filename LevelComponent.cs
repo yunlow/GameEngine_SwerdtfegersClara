@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
-    public class Level : GameObject
+    public class LevelComponent : Component
     {
         private int _width;
         private int _height;
@@ -14,12 +14,13 @@ namespace GameEngine_SwerdtfegersLucas
         private float enemy_spawn_interval = 7f;
         private Level _level;
         private int _randomNumber;
-        public Level(GameEngine game_engine, int width, int height) : base(game_engine)
+        private GameObject game_object;
+        public LevelComponent(GameEngine game_engine, int width, int height) : base(game_object)
         {
             _width = width;
             _height = height;
             _gameEngine = game_engine;
-           
+
 
 
             Building building = new Building(_gameEngine, _randomNumber);
@@ -42,22 +43,22 @@ namespace GameEngine_SwerdtfegersLucas
         }
 
         public int Width
-        { 
-            get 
-            { 
-                return _width; 
+        {
+            get
+            {
+                return _width;
             }
         }
         public int Height
-        { 
-            get 
-            { 
-                return _height; 
+        {
+            get
+            {
+                return _height;
             }
         }
-        public override void Update(float elapsed_time) 
-        { 
-        
+        public override void Update(float elapsed_time)
+        {
+
         }
 
         public override void FixedUpdate(float fixed_elapsed_time)
@@ -71,14 +72,14 @@ namespace GameEngine_SwerdtfegersLucas
             }
         }
 
-        public override void Render() 
-        { 
-        
+        public override void Render()
+        {
+
         }
 
         public override void HandleInput(ConsoleKey player_command)
-        { 
-        
+        {
+
         }
 
         private void SpawnEnemy()
@@ -92,4 +93,5 @@ namespace GameEngine_SwerdtfegersLucas
         }
 
     }
+}
 }
