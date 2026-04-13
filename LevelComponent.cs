@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
@@ -10,55 +8,29 @@ namespace GameEngine_SwerdtfegersLucas
         private int _height;
         private GameEngine _gameEngine;
         private Random _random = new Random();
+
         private float enemy_spawn_timer = 0f;
         private float enemy_spawn_interval = 7f;
-        private Level _level;
-        private int _randomNumber;
-        private GameObject game_object;
-        public LevelComponent(GameEngine game_engine, int width, int height) : base(game_object)
+        private int _spawnCount = 0;    
+
+        private EntityDatabase _entityDatabase;
+
+        public LevelComponent(GameObject game_object,  GameEngine game_engine, EntityDatabase entity_database, int width, int height) : base(game_object)
         {
             _width = width;
             _height = height;
             _gameEngine = game_engine;
-
-
-
-            Building building = new Building(_gameEngine, _randomNumber);
-            building.SetPosition(new Vector2(10, 10));
-            Generator generator = new Generator(10, _gameEngine);
-            generator.SetPosition(new Vector2(15, 15));
-            Factory factory = new Factory(10, 2, 1, _gameEngine);
-            factory.SetPosition(new Vector2(50, 8));
-
-            for (int i = 0; i < 4; i++)
-            {
-                SpawnEnemy();
-            }
-
-        }
-
-        public override void SetActive(bool is_active)
-        {
-            _level.SetActive(is_active);
+            _entityDatabase = entity_database;
         }
 
         public int Width
         {
-            get
-            {
-                return _width;
-            }
+            get { return _width; }
         }
+
         public int Height
         {
-            get
-            {
-                return _height;
-            }
-        }
-        public override void Update(float elapsed_time)
-        {
-
+            get { return _height; }
         }
 
         public override void FixedUpdate(float fixed_elapsed_time)
@@ -72,26 +44,36 @@ namespace GameEngine_SwerdtfegersLucas
             }
         }
 
-        public override void Render()
-        {
-
-        }
-
-        public override void HandleInput(ConsoleKey player_command)
-        {
-
-        }
-
         private void SpawnEnemy()
         {
-            Vector2 position = new Vector2(
-                _random.Next(0, _width),
-                _random.Next(2, _height)
-            );
+            string enemy_type; float enemy_speed; 
+            if (_spawnCount % 3 == 0) 
+            { enemy_type = "FastEnemy"; enemy_speed = 15f; } 
+            else 
+            { enemy_type = "Enemy"; enemy_speed = 5f; }
+            _spawnCount++;
 
-            new Enemy(_gameEngine, this, position);
+            GameObject new_enemy = _entityDatabase.CreateEntity(enemy_type);
+
+            PositionComponent position_component = new_enemy.GetComponent<PositionComponent>();
+
+            if (position_component != null) 
+            
+            { 
+                float random_x = _random.Next(0, _width); 
+                float random_y = _random.Next(0, _height); 
+                position_component.SetPosition(new Vector2(random_x, random_y)); 
+            }
+            AiMovementComponent ai_movement = new AiMovementComponent(new_enemy, position_component, this);
+            new_enemy.AddComponent(ai_movement);
+            _gameEngine.AddGameObject(new_enemy);
         }
 
+        public override Component Clone(GameObject parent_game_object)
+        {
+          throw new NotImplementedException();
+        }
     }
 }
-}
+//test git
+//pipi

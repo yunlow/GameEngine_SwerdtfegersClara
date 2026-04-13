@@ -1,26 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
     public class AiMovementComponent : Component
     {
-
-        private GameObject _gameObject;
-        private Vector2 _position;
         private Vector2 _direction = new Vector2(0, 0);
         private float _speed = 5f;
+
         private float _directionTimer = 0f;
         private float _directionChangeInterval = 3f;
+
         private Random _random = new Random();
+
+        private PositionComponent _positionComponent;
         private LevelComponent _level;
 
-        public AiMovementComponent(GameObject game_object)
+        public AiMovementComponent(
+            GameObject game_object,
+            PositionComponent position_component,
+            LevelComponent level
+        ) : base(game_object)
         {
-            _gameObject = game_object;
-          
+            _positionComponent = position_component;
+            _level = level;
         }
+
         public override void FixedUpdate(float fixed_elapsed_time)
         {
             _directionTimer += fixed_elapsed_time;
@@ -31,27 +35,29 @@ namespace GameEngine_SwerdtfegersLucas
                 _directionTimer = 0f;
             }
 
-            float newX = _position.GetX() + _direction.GetX() * _speed * fixed_elapsed_time;
-            float newY = _position.GetY() + _direction.GetY() * _speed * fixed_elapsed_time;
+            Vector2 position = _positionComponent.GetPosition();
 
+            float newX =
+                position.GetX()
+                + _direction.GetX()
+                * _speed
+                * fixed_elapsed_time;
 
-            if (newX < 0 || newX >= _level.Width)
-            {
+            float newY =
+                position.GetY()
+                + _direction.GetY()
+                * _speed
+                * fixed_elapsed_time;
+
+            if (newX >= 0 && newX < _level.Width)
+                position.SetX(newX);
+            else
                 _direction.SetX(-_direction.GetX());
-            }
-            else
-            {
-                _position.SetX(newX);
-            }
 
-            if (newY < 0 || newY >= _level.Height)
-            {
-                _direction.SetY(-_direction.GetY());
-            }
+            if (newY >= 0 && newY < _level.Height)
+                position.SetY(newY);
             else
-            {
-                _position.SetY(newY);
-            }
+                _direction.SetY(-_direction.GetY());
         }
 
         private void ChangeDirectionRandom()
@@ -66,5 +72,14 @@ namespace GameEngine_SwerdtfegersLucas
                 case 3: _direction = new Vector2(0, 1); break;
             }
         }
+        public override Component Clone(GameObject parent_game_object)
+        {
+            return new AiMovementComponent(
+                parent_game_object,
+                _positionComponent,
+                _level
+            );
+        }
     }
 }
+//git

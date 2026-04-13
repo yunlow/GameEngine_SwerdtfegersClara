@@ -5,16 +5,30 @@ using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
-    public class GameObject
+    public class GameObject : IPrototype<GameObject>
     {
-        private GameEngine _gameEngine;
+        
         private List<Component> _componentTable = new List<Component>();
         private string _name;
+        private bool _isActive = true;
+
+
         public GameObject(GameEngine game_engine, string name)
-        { 
-            _gameEngine = game_engine;
-            game_engine.AddGameObject(this);
+        {
+            
+           
             _name = name;
+            
+
+        }
+        public void SetActive(bool is_active)
+        {
+            _isActive = is_active;
+
+            foreach (Component component in _componentTable)
+            {
+                component.SetActive(is_active);
+            }
         }
 
         public void AddComponent(Component component)
@@ -54,6 +68,17 @@ namespace GameEngine_SwerdtfegersLucas
             return null;
         }
 
-
+        public GameObject Clone()
+        {
+            GameObject clone = new GameObject(null, _name + "_Clone");
+          
+            foreach (Component component in _componentTable)
+            {
+                Component cloned_component = component.Clone(clone);
+                clone.AddComponent(cloned_component);
+            }
+            
+            return clone;
+        }
     }
 }

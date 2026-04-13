@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameEngine_SwerdtfegersLucas
 {
-    public abstract class Component
+    public abstract class Component : ICloneable
     {
         private bool _isActive = true;
         private protected GameObject _gameObject;
@@ -25,9 +25,23 @@ namespace GameEngine_SwerdtfegersLucas
 
         public bool GetIsActive()
         {
-            
-                return _isActive;
-            
+
+            return _isActive;
+
+        }
+        public void SetActive(bool is_active)
+        {
+            _isActive = is_active;
+        }
+        public void SetGameObject(GameObject game_object)
+        {
+            _gameObject = game_object;
+        }
+        public abstract Component Clone(GameObject parent_game_object);
+
+        public object Clone()
+        {
+           return Clone(_gameObject);
         }
     }
 }
