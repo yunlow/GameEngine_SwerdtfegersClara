@@ -15,7 +15,8 @@ namespace GameEngine_SwerdtfegersLucas
         private PositionComponent _positionComponent;
         private LevelComponent _level;
 
-        public AiMovementComponent(
+        public AiMovementComponent
+        (
             GameObject game_object,
             PositionComponent position_component,
             LevelComponent level
@@ -50,14 +51,22 @@ namespace GameEngine_SwerdtfegersLucas
                 * fixed_elapsed_time;
 
             if (newX >= 0 && newX < _level.Width)
+            {
                 position.SetX(newX);
+            }
             else
+            {
                 _direction.SetX(-_direction.GetX());
+            }
 
             if (newY >= 0 && newY < _level.Height)
+            {
                 position.SetY(newY);
+            }
             else
+            {
                 _direction.SetY(-_direction.GetY());
+            }
         }
 
         private void ChangeDirectionRandom()
@@ -74,7 +83,8 @@ namespace GameEngine_SwerdtfegersLucas
         }
         public override Component Clone(GameObject parent_game_object)
         {
-            return new AiMovementComponent(
+            return new AiMovementComponent
+            (
                 parent_game_object,
                 _positionComponent,
                 _level

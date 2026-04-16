@@ -28,7 +28,7 @@ namespace GameEngine_SwerdtfegersLucas
                 _generationTimer = 0f;
             }
         }
-        }
+        
 
         public override Component Clone(GameObject parent_game_object)
         {

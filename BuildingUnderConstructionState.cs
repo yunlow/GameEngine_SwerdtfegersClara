@@ -35,7 +35,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void FixedUpdate(float fixed_elapsed_time)
         {
-            _constructionTimeLeft -= elapsed_time;
+            _constructionTimeLeft -= fixed_elapsed_time;
 
             if (_constructionTimeLeft <= 0)
             {
@@ -47,27 +47,10 @@ namespace GameEngine_SwerdtfegersLucas
                 );
             }
         }
-
         public void ProcessInput(ConsoleKeyInfo input)
         {
         }
+        public void Render() { }
 
-        public void Render()
-        {
-            PositionComponent position =
-                _building.GetComponent<PositionComponent>();
-
-            if (position != null)
-            {
-                Console.SetCursorPosition(
-                    (int)position.GetPosition().GetX(),
-                    (int)position.GetPosition().GetY()
-                );
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write($"C[{_constructionTimeLeft:F1}]");
-                Console.ResetColor();
-            }
-        }
     }
 }

@@ -25,38 +25,23 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void Update(float elapsed_time)
         {
-            _totalTime -= elapsed_time;
-
-            if (_totalTime <= 0)
-            {
-                _stateMachine.ChangeState( new BuildingClosedState(_stateMachine, _building)  );
-            }
+           
         }
 
         public void FixedUpdate(float fixed_elapsed_time)
         {
+            _totalTime -= fixed_elapsed_time;
+
+            if (_totalTime <= 0)
+            {
+                _stateMachine.ChangeState(new BuildingClosedState(_stateMachine, _building));
+            }
         }
 
         public void ProcessInput(ConsoleKeyInfo input)
         {
         }
+        public void Render() { }
 
-        public void Render()
-        {
-            PositionComponent position =
-                _building.GetComponent<PositionComponent>();
-
-            if (position != null)
-            {
-                Console.SetCursorPosition(
-                    (int)position.GetPosition().GetX(),
-                    (int)position.GetPosition().GetY()
-                );
-
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write($"B[{_totalTime:F1}]");
-                Console.ResetColor();
-            }
-        }
     }
 }

@@ -34,4 +34,6 @@ public class BuildingComponent : Component
     {
         return new BuildingComponent(parent_game_object, _render);
     }
+    public void Render() { }
+    public void ProcessInput() { }
 }
