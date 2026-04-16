@@ -22,6 +22,10 @@ namespace GameEngine_SwerdtfegersLucas
             _direction = new Vector2(0, 0);
         }
 
+        public override void Update(float elapsed_time)
+        {
+        }
+
         public override void FixedUpdate(float fixed_elapsed_time)
         {
             Vector2 position = _positionComponent.GetPosition();

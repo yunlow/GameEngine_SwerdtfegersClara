@@ -15,16 +15,20 @@ namespace GameEngine_SwerdtfegersLucas
 
         public override void Update(float elapsed_time)
         {
-            _generationTimer += elapsed_time;
+            
+        }
+
+       public override void FixedUpdate(float fixed_elapsed_time)
+        {
+            _generationTimer += fixed_elapsed_time;
 
             if (_generationTimer >= _generationInterval)
             {
-               
+
                 _generationTimer = 0f;
             }
         }
-
-       
+        }
 
         public override Component Clone(GameObject parent_game_object)
         {

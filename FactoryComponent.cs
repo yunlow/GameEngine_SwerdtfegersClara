@@ -14,7 +14,12 @@ namespace GameEngine_SwerdtfegersLucas
 
         public override void Update(float elapsed_time)
         {
-            _productionTimer += elapsed_time;
+            
+        }
+
+        public override void FixedUpdate(float fixed_elapsed_time)
+        {
+            _productionTimer += fixed_elapsed_time;
 
             if (_productionTimer >= _productionInterval)
             {
@@ -22,7 +27,6 @@ namespace GameEngine_SwerdtfegersLucas
                 _productionTimer = 0f;
             }
         }
-
         private void Produce()
         {
             Console.WriteLine("Factory produced resources!");

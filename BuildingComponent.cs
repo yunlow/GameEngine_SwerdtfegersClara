@@ -20,7 +20,12 @@ public class BuildingComponent : Component
 
     public override void Update(float elapsed_time)
     {
-        _time_left -= elapsed_time;
+        
+    }
+
+    public override void FixedUpdate(float fixed_elapsed_time)
+    {
+        _time_left -=fixed_elapsed_time;
 
         _render.Render();
     }

@@ -18,8 +18,15 @@ _health;
                 _gameObject.SetActive(false);
             }
         }
+        public override void FixedUpdate(float fixed_elapsed_time)
+        {
+            if (_health <= 0)
+            {
+                _gameObject.SetActive(false);
+            }
+        }
 
-        
+
 
         public override Component Clone(GameObject parent_game_object)
         {
