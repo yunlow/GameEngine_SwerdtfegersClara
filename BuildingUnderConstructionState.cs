@@ -30,6 +30,11 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void Update(float elapsed_time)
         {
+           
+        }
+
+        public void FixedUpdate(float fixed_elapsed_time)
+        {
             _constructionTimeLeft -= elapsed_time;
 
             if (_constructionTimeLeft <= 0)
@@ -41,10 +46,6 @@ namespace GameEngine_SwerdtfegersLucas
                     )
                 );
             }
-        }
-
-        public void FixedUpdate(float fixed_elapsed_time)
-        {
         }
 
         public void ProcessInput(ConsoleKeyInfo input)
