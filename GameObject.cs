@@ -11,6 +11,7 @@ namespace GameEngine_SwerdtfegersLucas
         private List<Component> _componentTable = new List<Component>();
         private string _name;
         private bool _isActive = true;
+        private GameEngine game_engine;
 
 
         public GameObject(GameEngine game_engine, string name)
@@ -20,6 +21,16 @@ namespace GameEngine_SwerdtfegersLucas
             _name = name;
             
 
+        }
+
+        public void OnEnable()
+        {
+            SetActive(true);
+        }
+
+        public void OnDisable()
+        {
+            SetActive(false);
         }
         public void SetActive(bool is_active)
         {
@@ -70,7 +81,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public GameObject Clone()
         {
-            GameObject clone = new GameObject(null, _name + "_Clone");
+            GameObject clone = new GameObject(game_engine, _name + "_Clone");
           
             foreach (Component component in _componentTable)
             {

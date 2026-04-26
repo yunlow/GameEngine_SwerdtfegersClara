@@ -10,7 +10,12 @@ public class RenderManager
         _renderTable.Add(render_component);
     }
 
-    public static void Render()
+    public void Remove(RenderComponent render_component)
+    {
+        _renderTable.Remove(render_component);
+    }
+
+    public void Render()
     {
         foreach (RenderComponent render_component in _renderTable)
         {

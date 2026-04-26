@@ -56,6 +56,13 @@ namespace GameEngine_SwerdtfegersLucas
 
         public override Component Clone(GameObject parent_game_object)
         {
+            PositionComponent position_component = parent_game_object.GetComponent<PositionComponent>();
+
+            if (position_component == null)
+
+            {
+              Console.WriteLine("PositionComponent is null!");
+            }
             return new MovementComponent(
                 parent_game_object,
                 _speed,

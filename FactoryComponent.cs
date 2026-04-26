@@ -29,7 +29,12 @@ namespace GameEngine_SwerdtfegersLucas
         }
         private void Produce()
         {
-            Console.WriteLine("Factory produced resources!");
+            FactoryComponent component = _gameObject.GetComponent<FactoryComponent>();
+
+            if (component != null)
+            {
+                component.Produce();
+            }
         }
 
         public override Component Clone(GameObject parent_game_object)

@@ -6,11 +6,11 @@ using System.Text;
 public class BuildingComponent : Component
 {
     private float _time_left;
-    private RenderComponent _render;
+    private RenderManager _render;
 
     public BuildingComponent(
         GameObject game_object,
-        RenderComponent render
+        RenderManager render
     )
         : base(game_object)
     {
@@ -34,6 +34,5 @@ public class BuildingComponent : Component
     {
         return new BuildingComponent(parent_game_object, _render);
     }
-    public void Render() { }
-    public void ProcessInput() { }
+   
 }

@@ -53,20 +53,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void Render()
         {
-            PositionComponent position =
-                _building.GetComponent<PositionComponent>();
-
-            if (position != null)
-            {
-                Console.SetCursorPosition(
-                    (int)position.GetPosition().GetX(),
-                    (int)position.GetPosition().GetY()
-                );
-
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.Write($"X[{_timeBeforeOpening:F1}]");
-                Console.ResetColor();
-            }
+            
         }
     }
 }
