@@ -29,6 +29,15 @@ namespace GameEngine_SwerdtfegersLucas
             return _isActive;
 
         }
+        public void OnEnable()
+        {
+            SetActive(true);
+        }
+
+        public void OnDisable()
+        {
+            SetActive(false);
+        }
         public void SetActive(bool is_active)
         {
             _isActive = is_active;

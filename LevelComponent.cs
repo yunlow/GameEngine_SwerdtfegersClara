@@ -21,6 +21,16 @@ namespace GameEngine_SwerdtfegersLucas
             _height = height;
             _gameEngine = game_engine;
             _entityDatabase = entity_database;
+
+            RegisterPrototypes();
+        }
+
+        public void RegisterPrototypes()
+        {
+            GameObject enemy_prototype = new GameObject(_gameEngine, "Enemy");
+
+            _entityDatabase.RegisterEntity("Enemy", enemy_prototype);
+
         }
 
         public int Width
@@ -75,5 +85,3 @@ namespace GameEngine_SwerdtfegersLucas
         }
     }
 }
-//test git
-//pipi

@@ -6,6 +6,9 @@ namespace GameEngine_SwerdtfegersLucas
     {
         private float _productionTimer = 0f;
         private float _productionInterval = 10f;
+        private int _energy;
+        private int _energyCost = 5;
+        private int _ressources = 0;
 
         public FactoryComponent(GameObject game_object)
             : base(game_object)
@@ -29,11 +32,17 @@ namespace GameEngine_SwerdtfegersLucas
         }
         private void Produce()
         {
-            FactoryComponent component = _gameObject.GetComponent<FactoryComponent>();
+            GeneratorComponent generator = _gameObject.GetComponent<GeneratorComponent>();
 
-            if (component != null)
+            if (generator != null && generator.ReturnEnergy() >= _energyCost)
             {
-                component.Produce();
+                generator.ConsumeEnergy(_energyCost);  // voir ci-dessous
+                _ressources++;
+                Console.WriteLine($"[Factory] Production ! Ressources totales : {_ressources}");
+            }
+            else
+            {
+                Console.WriteLine("[Factory] Pas assez d'énergie pour produire.");
             }
         }
 

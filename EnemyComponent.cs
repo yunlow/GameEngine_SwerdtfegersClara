@@ -4,8 +4,7 @@ namespace GameEngine_SwerdtfegersLucas
 {
     public class EnemyComponent : Component
     {
-        private int 
-_health;
+        private int _health;
         public EnemyComponent(GameObject game_object)
             : base(game_object)
         {

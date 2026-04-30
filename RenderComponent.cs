@@ -37,10 +37,12 @@ namespace GameEngine_SwerdtfegersLucas
         }
         public override Component Clone(GameObject parent_game_object)
         {
+            PositionComponent cloned_position = parent_game_object.GetComponent<PositionComponent>();
+
             return new RenderComponent(
                 parent_game_object,
                 _render,
-                _positionComponent,
+               cloned_position,
                 _color
             );
         }
