@@ -6,14 +6,17 @@ namespace GameEngine_SwerdtfegersLucas
     {
         private StateMachine _stateMachine;
         private GameEngine _gameEngine;
+        private EventManager _eventManager;
 
         public PauseState(
             StateMachine state_machine,
-            GameEngine game_engine
+            GameEngine game_engine,
+            EventManager event_manager
         )
         {
             _stateMachine = state_machine;
             _gameEngine = game_engine;
+            _eventManager = event_manager;
         }
 
         public void Enter()
@@ -31,6 +34,11 @@ namespace GameEngine_SwerdtfegersLucas
             Console.WriteLine(
                 "Press Enter to resume the game or Q to access the Main Menu."
             );
+        }
+        public void Quit()
+        {
+
+            _eventManager.TriggerEvent(EventType.QuitGameEvent);
         }
 
         public void Update(float elapsed_time)

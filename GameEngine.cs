@@ -20,8 +20,10 @@ namespace GameEngine_SwerdtfegersLucas
         private List<GameObject> _gameObjectToRemoveTable =
             new List<GameObject>();
 
+        private EventManager _eventManager;
+
         private StateMachine _gameFlowStateMachine =
-            new StateMachine();
+            new StateMachine(_eventManager);
 
         private GameObject _playerGameObject;
         private GameObject _levelGameObject;
@@ -32,9 +34,9 @@ namespace GameEngine_SwerdtfegersLucas
         private int _height;
 
         private EntityDatabase _entityDatabase;
-       
 
-        public GameEngine()
+       
+        public GameEngine(EventManager event_manager)
         {
             Console.CursorVisible = false;
 
@@ -50,7 +52,7 @@ namespace GameEngine_SwerdtfegersLucas
                 new MainMenuState(this)
             );
 
-            
+            _eventManager = event_manager;
         }
 
         public void StartGame()
@@ -132,6 +134,8 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void Run()
         {
+            
+
             const float FIXED_FRAME_TIME =
                 20 / 1000.0f;
 
@@ -244,7 +248,7 @@ namespace GameEngine_SwerdtfegersLucas
 
             _gameFlowStateMachine.Render();
 
-            RenderManager.Render();
+            
         }
 
         public float GetCurrentTime()

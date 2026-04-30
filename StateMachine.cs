@@ -7,7 +7,15 @@ namespace GameEngine_SwerdtfegersLucas
     public class StateMachine
     {
         private IState _currentState;
-  
+
+        private EventManager _eventManager;
+
+        public StateMachine(EventManager event_manager)
+        {
+            _eventManager = event_manager;
+
+            _eventManager.RegisterToEvent(EventType.StateChangedGameEvent, () => Console.WriteLine("State changed"));
+        }
         public void Update(float elapsed_time)
         {
             if (_currentState != null)
@@ -45,9 +53,9 @@ namespace GameEngine_SwerdtfegersLucas
         }
         public void ChangeState(IState new_state) 
         { 
-            _currentState.Exit();
+            _eventManager.TriggerEvent(new StateChangedGameEvent(_currentState, new_state));
             _currentState = new_state;
-            _currentState.Enter();
+
         }
 
     }
