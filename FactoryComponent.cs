@@ -10,15 +10,14 @@ namespace GameEngine_SwerdtfegersLucas
         private int _energyCost = 5;
         private int _ressources = 0;
 
-        public FactoryComponent(GameObject game_object)
+        private EventManager _eventManager;
+
+        public FactoryComponent(GameObject game_object, EventManager event_manager)
             : base(game_object)
         {
+            _eventManager = event_manager;
         }
 
-        public override void Update(float elapsed_time)
-        {
-            
-        }
 
         public override void FixedUpdate(float fixed_elapsed_time)
         {
@@ -48,7 +47,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public override Component Clone(GameObject parent_game_object)
         {
-            return new FactoryComponent(parent_game_object);
+            return new FactoryComponent(parent_game_object, _eventManager);
         }
     }
 }

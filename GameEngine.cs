@@ -34,15 +34,16 @@ namespace GameEngine_SwerdtfegersLucas
         private int _height;
 
         private EntityDatabase _entityDatabase;
+        private UiManager _uiManager;
 
-       
+        private IndustrialProductionAchievementManager _industrialProductionAchievementManager;
+
         public GameEngine(EventManager event_manager)
         {
             Console.CursorVisible = false;
 
             _stopwatch.Start();
 
-          
             _width = Console.WindowWidth;
             _height = Console.WindowHeight;
 
@@ -53,6 +54,11 @@ namespace GameEngine_SwerdtfegersLucas
             );
 
             _eventManager = event_manager;
+
+            _industrialProductionAchievementManager =
+                new IndustrialProductionAchievementManager(_eventManager);
+
+            _uiManager = new UiManager(_eventManager);
         }
 
         public void StartGame()
@@ -60,8 +66,8 @@ namespace GameEngine_SwerdtfegersLucas
             _gameObjectTable.Clear();
             _gameObjectToAddTable.Clear();
 
-          
-           
+
+
             _width = Console.WindowWidth;
             _height = Console.WindowHeight;
 
@@ -93,7 +99,7 @@ namespace GameEngine_SwerdtfegersLucas
                     _playerGameObject
                 );
 
-            _playerGameObject.AddComponent(  position  );
+            _playerGameObject.AddComponent(position);
 
             RenderComponent render =
                 new RenderComponent(
@@ -103,7 +109,7 @@ namespace GameEngine_SwerdtfegersLucas
                     ConsoleColor.Green
                 );
 
-            _playerGameObject.AddComponent( render );
+            _playerGameObject.AddComponent(render);
 
             MovementComponent movement =
                 new MovementComponent(
@@ -134,7 +140,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         public void Run()
         {
-            
+
 
             const float FIXED_FRAME_TIME =
                 20 / 1000.0f;
@@ -246,9 +252,11 @@ namespace GameEngine_SwerdtfegersLucas
         {
             Console.Clear();
 
+            _uiManager.Render();
+
             _gameFlowStateMachine.Render();
 
-            
+
         }
 
         public float GetCurrentTime()
