@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEngine_SwerdtfegersLucas.Events;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -20,15 +21,18 @@ namespace GameEngine_SwerdtfegersLucas
         private List<GameObject> _gameObjectToRemoveTable =
             new List<GameObject>();
 
-        private EventManager _eventManager;
+        private EventManager _eventManager = new EventManager();
 
-        private StateMachine _gameFlowStateMachine =
-            new StateMachine(_eventManager);
+        private StateMachine _gameFlowStateMachine;
 
         private GameObject _playerGameObject;
         private GameObject _levelGameObject;
 
         private InputComponent _inputComponent;
+
+        private LogManager _logManager;
+
+        
 
         private int _width;
         private int _height;
@@ -38,7 +42,7 @@ namespace GameEngine_SwerdtfegersLucas
 
         private IndustrialProductionAchievementManager _industrialProductionAchievementManager;
 
-        public GameEngine(EventManager event_manager)
+        public GameEngine()
         {
             Console.CursorVisible = false;
 
@@ -49,11 +53,15 @@ namespace GameEngine_SwerdtfegersLucas
 
             _entityDatabase = new EntityDatabase();
 
+            _logManager = new LogManager(_eventManager);
+
+
+            _gameFlowStateMachine = new StateMachine(_eventManager);
+
             _gameFlowStateMachine.SetInitialState(
                 new MainMenuState(this)
             );
 
-            _eventManager = event_manager;
 
             _industrialProductionAchievementManager =
                 new IndustrialProductionAchievementManager(_eventManager);
@@ -96,7 +104,8 @@ namespace GameEngine_SwerdtfegersLucas
                         _width / 2,
                         _height / 2
                     ),
-                    _playerGameObject
+                    _playerGameObject,
+                    _eventManager
                 );
 
             _playerGameObject.AddComponent(position);
@@ -134,9 +143,11 @@ namespace GameEngine_SwerdtfegersLucas
             );
             AddGameObject(_playerGameObject);
             _gameFlowStateMachine.ChangeState(
-                new IngameState(_gameFlowStateMachine, this)
+                new IngameState(_gameFlowStateMachine, this, _eventManager)
             );
         }
+
+
 
         public void Run()
         {

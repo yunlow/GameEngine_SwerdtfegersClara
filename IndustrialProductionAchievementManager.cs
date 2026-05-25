@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEngine_SwerdtfegersLucas.Events;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,13 +17,12 @@ namespace GameEngine_SwerdtfegersLucas
         {
             _eventManager = event_manager;
 
-            _eventManager.RegisterToEvent(
-                EventType.AchievementGameEvent,
-                OnResourceProduced
-            );
+            _eventManager.RegisterToEvent<RessourceProducedEvent>(OnResourceProduced);
+              
+           
         }
 
-        private void OnResourceProduced()
+        private void OnResourceProduced(GameEvent game_event)
         {
             _totalResourcesProduced++;
 
@@ -48,10 +48,10 @@ namespace GameEngine_SwerdtfegersLucas
         private void UnlockAchievement(string message)
         {
             Console.WriteLine($"[Achievement] {message}");
-            _eventManager.TriggerEvent(EventType.AchievementGameEvent);
+            _eventManager.TriggerEvent(new AchievementGameEvent());
         }
     }
 
 
 }
-}
+

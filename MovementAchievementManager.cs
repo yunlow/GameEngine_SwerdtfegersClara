@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEngine_SwerdtfegersLucas.Events;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,6 +11,11 @@ namespace GameEngine_SwerdtfegersLucas
         public MovementAchievementManager(EventManager event_manager)
         { 
         _eventManager = event_manager;
+
+            _eventManager.RegisterToEvent<PlayerMovedGameEvent>(OnPlayerMoved);
         }
+
+        private void OnPlayerMoved(GameEvent game_event)
+        { }
     }
 }

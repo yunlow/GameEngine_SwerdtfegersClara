@@ -7,7 +7,7 @@ namespace GameEngine_SwerdtfegersLucas
 {
     public class GameObject : IPrototype<GameObject>
     {
-        
+
         private List<Component> _componentTable = new List<Component>();
         private string _name;
         private bool _isActive = true;
@@ -16,10 +16,10 @@ namespace GameEngine_SwerdtfegersLucas
 
         public GameObject(GameEngine game_engine, string name)
         {
-            
-           
+
+
             _name = name;
-            
+
 
         }
 
@@ -82,14 +82,19 @@ namespace GameEngine_SwerdtfegersLucas
         public GameObject Clone()
         {
             GameObject clone = new GameObject(game_engine, _name + "_Clone");
-          
+
             foreach (Component component in _componentTable)
             {
                 Component cloned_component = component.Clone(clone);
                 clone.AddComponent(cloned_component);
             }
-            
+
             return clone;
+        }
+
+        public string GetName()
+        {
+            return _name;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEngine_SwerdtfegersLucas.Events;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,8 +15,14 @@ namespace GameEngine_SwerdtfegersLucas
         {
             _eventManager = event_manager;
 
-            _eventManager.RegisterToEvent(EventType.StateChangedGameEvent, () => Console.WriteLine("State changed"));
+            _eventManager.RegisterToEvent<StateChangedGameEvent>(OnStateChanged);
         }
+
+        private void OnStateChanged(GameEvent game_event) 
+        {
+            Console.WriteLine("State changed");
+        }
+
         public void Update(float elapsed_time)
         {
             if (_currentState != null)

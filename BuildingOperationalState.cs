@@ -18,6 +18,10 @@ namespace GameEngine_SwerdtfegersLucas
         {
             Console.WriteLine("Building is now operational!");
         }
+        public string GetName()
+        {
+            return "BuildingOperationalState";
+        }
 
         public void Exit()
         {

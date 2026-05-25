@@ -13,5 +13,6 @@ namespace GameEngine_SwerdtfegersLucas
         public void FixedUpdate(float fixed_elapsed_time);
         public void ProcessInput(ConsoleKeyInfo input);
         public void Render();
+        public string GetName();
     }
 }

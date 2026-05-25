@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEngine_SwerdtfegersLucas.Events;
+using System;
 
 namespace GameEngine_SwerdtfegersLucas
 {
@@ -17,8 +18,14 @@ namespace GameEngine_SwerdtfegersLucas
             _stateMachine = state_machine;
             _gameEngine = game_engine;
             _eventManager = event_manager;
+
+            _eventManager.RegisterToEvent<QuitGameEvent>(OnQuit);
         }
 
+        public string GetName()
+        {
+            return "PauseState";
+        }
         public void Enter()
         {
             Console.WriteLine("Entering Pause Mode!");
@@ -35,10 +42,10 @@ namespace GameEngine_SwerdtfegersLucas
                 "Press Enter to resume the game or Q to access the Main Menu."
             );
         }
-        public void Quit()
+        public void OnQuit(GameEvent game_event)
         {
 
-            _eventManager.TriggerEvent(EventType.QuitGameEvent);
+            
         }
 
         public void Update(float elapsed_time)
@@ -54,7 +61,7 @@ namespace GameEngine_SwerdtfegersLucas
             if (input.Key == ConsoleKey.Enter)
             {
                 _stateMachine.ChangeState(
-                    new IngameState(_stateMachine, _gameEngine)
+                    new IngameState(_stateMachine, _gameEngine, _eventManager)
                 );
             }
 

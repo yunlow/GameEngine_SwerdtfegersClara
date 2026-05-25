@@ -7,13 +7,19 @@ namespace GameEngine_SwerdtfegersLucas
     public abstract class Component : ICloneable
     {
         private bool _isActive = true;
-        private protected GameObject _gameObject;
+        protected GameObject _gameObject;
+
+       
 
         public Component(GameObject game_object)
         {
             _gameObject = game_object;
         }
 
+        public string GetParentName()
+        {
+            return _gameObject.GetName();
+        }
         public virtual void Update(float elapsed_time)
         {
 

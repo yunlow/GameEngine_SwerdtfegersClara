@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameEngine_SwerdtfegersLucas
+namespace GameEngine_SwerdtfegersLucas.Events
 {
-    public enum EventType
+    public abstract class GameEvent
     {
     }
 }

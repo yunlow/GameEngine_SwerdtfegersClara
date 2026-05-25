@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameEngine_SwerdtfegersLucas.Events;
+using System;
 
 namespace GameEngine_SwerdtfegersLucas
 {
@@ -6,14 +7,21 @@ namespace GameEngine_SwerdtfegersLucas
     {
         private StateMachine _stateMachine;
         private GameEngine _engine;
-
+        private EventManager _eventManager;
         public IngameState(
             StateMachine state_machine,
-            GameEngine engine
+            GameEngine engine,
+            EventManager event_manager
         )
         {
             _stateMachine = state_machine;
             _engine = engine;
+            _eventManager = event_manager;
+        }
+
+        public string GetName()
+        {
+            return "IngameState";
         }
 
         public void Enter()
@@ -40,7 +48,8 @@ namespace GameEngine_SwerdtfegersLucas
                 _stateMachine.ChangeState(
                     new PauseState(
                         _stateMachine,
-                        _engine
+                        _engine,
+                        _eventManager
                     )
                 );
             }

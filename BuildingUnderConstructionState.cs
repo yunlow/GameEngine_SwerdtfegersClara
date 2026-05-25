@@ -23,7 +23,10 @@ namespace GameEngine_SwerdtfegersLucas
         {
             Console.WriteLine("Building is under construction!");
         }
-
+        public string GetName()
+        {
+            return "BuildingUnderConstructionState";
+        }
         public void Exit()
         {
         }

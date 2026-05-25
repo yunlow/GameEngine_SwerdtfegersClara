@@ -19,6 +19,10 @@ namespace GameEngine_SwerdtfegersLucas
             Console.Clear();
             Console.WriteLine("Entering game!");
         }
+        public string GetName()
+        {
+            return "MainMenuState";
+        }
         public void Exit()
         {
 

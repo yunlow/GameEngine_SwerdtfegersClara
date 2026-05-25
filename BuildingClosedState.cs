@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace GameEngine_SwerdtfegersLucas
 {
@@ -15,6 +16,10 @@ namespace GameEngine_SwerdtfegersLucas
         {
             _stateMachine = state_machine;
             _building = building;
+        }
+        public string GetName()
+        {
+            return "BuildingClosedState";
         }
 
         public void Enter()
